@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<h1 class="jupiter">Address Index API</h1>
+
+<h2 class="saturn">Beta release</h2>
+
+<p>The ONS Address Index API and Developer Hub are currently at a <a href="https://en.wikipedia.org/wiki/Software_release_life_cycle" class="icon--external-link">beta release</a>. We are going through a process of user engagement to improve the API and documentation.</p>
+
+<p>We have a proposed approach to versioning the API and documentation is currently being developed. In the meantime existing resources are subject to change.</p>
+
+<p>Please refer to the <a href="https://ons-registers.slack.com/" class="icon--external-link">slack channel</a> for ongoing feature and documentation discussions, and announcements on upcoming feature releases.</p>
+
+<h2 class="saturn">Getting started</h2>
+
+<p>If you are new to the Address Index API, we recommend you take a look at the getting started guide, with the resources and examples provided there to help you.</p>
+
+<p>We also have a <a href="https://ons-registers.slack.com/" class="icon--external-link">slack channel</a> where you can discuss the API, find help and provide feedback.</p>
+
+<h2 class="saturn">API reference</h2>
+
+<h3 class="neptune">Single Match</h3>
+
+<table class="table">
+    <thead class="table--head">
+    <th scope="col" class="table--header--cell">Method</th>
+    <th scope="col" class="table--header--cell">HTTP Request</th>
+    <th scope="col" class="table--header--cell">Description</th>
+    </thead>
+    <tbody>
+
+    <tr class="table--row">
+        <td class="table--cell">Address Search</td>
+        <td class="table--cell">GET /addresses</td>
+        <td class="table--cell">Search for addresses</td>
+    </tr>
+    <tr class="table--row">
+        <td class="table--cell"><a href="{{ url_for('uprn') }}">UPRN Search</a></td>
+        <td class="table--cell">GET /addresses/uprn</td>
+        <td class="table--cell">Search for address by UPRN</td>
+    </tr>
+    <tr class="table--row">
+        <td class="table--cell"><a href="{{ url_for('postcode') }}">Postcode Search</a></td>
+        <td class="table--cell">GET /addresses/postcode</td>
+        <td class="table--cell">Search for addresses by postcode</td>
+    </tr>
+    <tr class="table--row">
+        <td class="table--cell"><a href="{{ url_for('partial') }}">Partial Search</a></td>
+        <td class="table--cell">GET /addresses/partial</td>
+        <td class="table--cell">Search for addresses by partial search term</td>
+    </tr>
+
+    </tbody>
+</table>
+
+<p>For full documentation regarding these resource URIs, see the <a href="{{ url_for('singleMatch') }}">Single Match</a> page.</p>
+
+<p>For a description of the resources accepted and returned by these URIs, see the UPRNSearch , <a href="{{ url_for('resourcePostcode') }}">PostcodeSearch</a> , PartialSearch and Search resource representation pages.</p>
+
+{% endblock %}

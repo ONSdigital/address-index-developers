@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Single Match Search{% endblock %}
+
+{% block content %}
+<h1 class="jupiter">Single Match Search</h1>
+
+<h2 class="saturn">Search Address Index</h2>
+
+<table class="table">
+    <thead class="table--head">
+    <th scope="col" class="table--header--cell">Method</th>
+    <th scope="col" class="table--header--cell">HTTP Request</th>
+    <th scope="col" class="table--header--cell">Description</th>
+    </thead>
+    <tbody>
+
+    <tr class="table--row">
+        <td class="table--cell">Address Search</td>
+        <td class="table--cell">GET /addresses</td>
+        <td class="table--cell">Search for addresses</td>
+    </tr>
+
+    </tbody>
+</table>
+
+<h2 class="saturn">Search Address Index by UPRN</h2>
+
+<table class="table">
+    <thead class="table--head">
+    <th scope="col" class="table--header--cell">Method</th>
+    <th scope="col" class="table--header--cell">HTTP Request</th>
+    <th scope="col" class="table--header--cell">Description</th>
+    </thead>
+    <tbody>
+
+    <tr class="table--row">
+        <td class="table--cell"><a href="{{ url_for('uprn') }}">UPRN Search</a></td>
+        <td class="table--cell">GET /addresses/uprn</td>
+        <td class="table--cell">Search for address by UPRN</td>
+    </tr>
+
+    </tbody>
+</table>
+
+<h2 class="saturn">Search Address Index by Postcode</h2>
+
+<table class="table">
+    <thead class="table--head">
+    <th scope="col" class="table--header--cell">Method</th>
+    <th scope="col" class="table--header--cell">HTTP Request</th>
+    <th scope="col" class="table--header--cell">Description</th>
+    </thead>
+    <tbody>
+    <tr class="table--row">
+        <td class="table--cell"><a href="{{ url_for('postcode') }}">Postcode Search</a></td>
+        <td class="table--cell">GET /addresses/postcode</td>
+        <td class="table--cell">Search for addresses by postcode</td>
+    </tr>
+
+    </tbody>
+</table>
+
+<h2 class="saturn">Search Address Index by partial match</h2>
+
+<table class="table">
+    <thead class="table--head">
+    <th scope="col" class="table--header--cell">Method</th>
+    <th scope="col" class="table--header--cell">HTTP Request</th>
+    <th scope="col" class="table--header--cell">Description</th>
+    </thead>
+    <tbody>
+    <tr class="table--row">
+        <td class="table--cell"><a href="{{ url_for('partial') }}">Partial Search</a></td>
+        <td class="table--cell">GET /addresses/partial</td>
+        <td class="table--cell">Search for addresses by partial search term</td>
+    </tr>
+
+    </tbody>
+</table>
+
+{% endblock %}

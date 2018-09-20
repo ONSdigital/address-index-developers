@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Error{% endblock %}
+
+{% block content %}
+<h1 class="jupiter">Error</h1>
+
+<p>{{error_detail}}</p>
+
+<div class="accordion js-accordion">
+    <div class="js-accordion-content">
+        <h3 class="accordion__title js-accordion-title u-cf icon--accordion" data-js-accordion-event-label="View Error Detail">
+            <span class="accordion__title-text">View Error Detail</span>
+            <button class="btn btn--secondary btn--small accordion__title-right accordion-unhide@m js-accordion-toggle u-wa--@xs" data-close-label="Hide" data-open-label="Show" aria-hidden="true">Show</button>
+        </h3>
+        <div class="accordion__body mars js-accordion-body">
+            <div class="u-mb-s">
+                <div class="u-mb-s">{{error_type}}:</div>
+                <p>{{error}}</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

@@ -60,20 +60,21 @@
 
             <nav class="nav nav--sections nav--vertical js-nav page__nav" id="section-nav" aria-labelledby="menu-btn" role="menu">
                 <ul class="nav__list js-nav-list">
-                    <li><a href="{{url_for('quickStart') }}">Quick Start</a></li>
-                    <li><a href="{{url_for('singleMatch') }}">Single Match</a>
+                    <li><a href="{{url_for('quick_start') }}">Quick Start</a></li>
+                    <li><a href="{{url_for('single_match') }}">Single Match</a>
                         <ul>
+                            <li><a href="{{url_for('single_address') }}">Address</a></li>
                             <li><a href="{{url_for('uprn') }}">UPRN</a></li>
                             <li><a href="{{url_for('postcode') }}">Postcode</a></li>
                             <li><a href="{{url_for('partial') }}">Partial</a></li>
                             <li>Resources
                                 <ul>
-                                    <li><a href="{{url_for('resourcePostcode') }}">Postcode</a></li>
+                                    <li><a href="{{url_for('resource_postcode') }}">Postcode</a></li>
                                 </ul>
                             </li>
                         </ul>
                     </li>
-                    <li><a href="{{url_for('rateLimiting') }}">Rate Limiting</a></li>
+                    <li><a href="{{url_for('rate_limiting') }}">Rate Limiting</a></li>
                     <li><a href="{{url_for('versions') }}">Versions</a></li>
                 </ul>
             </nav>

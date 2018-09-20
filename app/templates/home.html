@@ -33,7 +33,7 @@
     <tbody>
 
     <tr class="table--row">
-        <td class="table--cell">Address Search</td>
+        <td class="table--cell"><a href="{{ url_for('single_address') }}">Address Search</a></td>
         <td class="table--cell">GET /addresses</td>
         <td class="table--cell">Search for addresses</td>
     </tr>
@@ -56,8 +56,8 @@
     </tbody>
 </table>
 
-<p>For full documentation regarding these resource URIs, see the <a href="{{ url_for('singleMatch') }}">Single Match</a> page.</p>
+<p>For full documentation regarding these resource URIs, see the <a href="{{ url_for('single_match') }}">Single Match</a> page.</p>
 
-<p>For a description of the resources accepted and returned by these URIs, see the UPRNSearch , <a href="{{ url_for('resourcePostcode') }}">PostcodeSearch</a> , PartialSearch and Search resource representation pages.</p>
+<p>For a description of the resources accepted and returned by these URIs, see the UPRNSearch , <a href="{{ url_for('resource_postcode') }}">PostcodeSearch</a> , PartialSearch and Search resource representation pages.</p>
 
 {% endblock %}

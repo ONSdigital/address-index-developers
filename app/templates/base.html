@@ -60,7 +60,10 @@
 
             <nav class="nav nav--sections nav--vertical js-nav page__nav" id="section-nav" aria-labelledby="menu-btn" role="menu">
                 <ul class="nav__list js-nav-list">
+                    <li><a href="{{url_for('getting_started') }}">Getting Started</a></li>
                     <li><a href="{{url_for('quick_start') }}">Quick Start</a></li>
+                    <li><a href="{{url_for('authorisation') }}">Authorisation</a></li>
+                    <li><a href="{{ url_for('developer_guidelines') }}">Developer Guidelines</a></li>
                     <li><a href="{{url_for('single_match') }}">Single Match</a>
                         <ul>
                             <li><a href="{{url_for('single_address') }}">Address</a></li>

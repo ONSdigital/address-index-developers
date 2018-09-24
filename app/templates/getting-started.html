@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Getting started with the ONS Address Index API{% endblock %}
+
+{% block content %}
+<h1 class="jupiter">Getting started with the ONS Address Index API</h1>
+
+<p>The ONS Address Index API lets you retrieve the official version of addresses in England and Wales. The data is currently updated on a 6 week rolling basis.</p>
+
+<h2 class="saturn">Quick start</h2>
+
+<p>If you are already familiar with JSON RESTful APIs, then you can jump straight in with the <a href="{{ url_for('quick_start') }}">quick start guide</a>.</p>
+
+<p>Otherwise, read on for a quick tour of the essentials.</p>
+
+<h2 class="saturn">First steps</h2>
+
+<ol>
+    <li>Set up an Address Index account.</li>
+    <li>Read the Address Index API overview.</li>
+    <li>Gain an understanding of REST web services.</li>
+    <li>Learn about the JSON data format.</li>
+    <li>Learn about authentication.</li>
+    <li>Explore the Companies House API.</li>
+    <li>Developer guidelines.</li>
+    <li>Rate limiting.</li>
+</ol>
+
+<h3 class="venus">Set up a Address Index account</h3>
+
+<p>To be able to explore and perform tests with the Address Index API, you need to request a user account with ONS.</p>
+
+<h3 class="venus">Overview</h3>
+
+<p>The Address Index API <a href="{{ url_for('overview') }}">overview</a> describes the basic operation of the API.</p>
+
+<h3 class="venus">REST web services</h3>
+
+<p>REST, or <a href="http://en.wikipedia.org/wiki/Representational_state_transfer" class="icon--external-link">Representational State Transfer</a>, is an architectural software style in which standard HTTP requests are used to provide a simple and consistent approach to requesting and modifying data.</p>
+
+<p>In a RESTful style of API, data resources are allocated unique URLs and manipulated through standard HTTP verbs such as GET to request a resource, POST to create a resource, PUT to change a resource, and DELETE to remove a resource.</p>
+
+<h3 class="venus">The JSON data format</h3>
+
+<p>JSON, or <a href="https://en.wikipedia.org/wiki/JSON" class="icon--external-link">JavaScript Object Notation</a>, is an open, standard format for storing and exchanging data. It is easier to use than XML, is more compact, and can be used as a data format by any programming language. This makes it ideal for HTTP-based API services.</p>
+
+<p>Further information can be found at <a href="http://www.json.org/" class="icon--external-link">json.org</a>.</p>
+
+<h3 class="venus">Authentication</h3>
+
+<p>Access to all API services requires authentication. The <a href="{{ url_for('authorisation') }}">Authorisation</a> page describes the authorisation mechanism used by the Address Index API, and how to register your application.</p>
+
+<h3 class="venus">Explore the API</h3>
+
+<p>Each Address Index API reference page contains an embedded "explorer" that allows the reader to try out the service in-situ, without having to write any client code at all.</p>
+
+<h3 class="venus">Developer guidelines</h3>
+
+<p>There are some simple <a href="{{ url_for('developer_guidelines') }}">developer guidelines</a> you can follow to help you achieve success with the Address Index API.</p>
+
+<h3 class="venus">API rate limits</h3>
+
+<p>The Address Index API is subject to <a href="{{ url_for('rate_limiting') }}">rate limiting</a> to protect the quality of service for all users.</p>
+
+
+{% endblock %}

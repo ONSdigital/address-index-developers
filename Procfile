@@ -1,1 +1,1 @@
-web: python3.6 developers.py
+web: python developers.py

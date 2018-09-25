@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Authorisation{% endblock %}
+
+{% block content %}
+<h1 class="jupiter">Authorisation</h1>
+
+<h2 class="saturn">API key authentication</h2>
+
+<p>The Address Index API requires authentication credentials, in the form of an API key, to be sent with each request.</p>
+
+<p>An API key will have been provided to you when you were granted access to the API.</p>
+
+<h3 class="neptune">Sending the API key</h3>
+
+<p>The Address Index API uses HTTP Basic Authentication to transmit an API key between the client application and the server. Basic authentication is usually made up of a username and password pair; the Address Index API takes the username as the API key and ignores the password, so can be left blank.</p>
+
+<h2 class="saturn">Example</h2>
+
+<h3 class="neptune">HTTP Basic Authentication</h3>
+
+<p>For an API key of my_api_key, the following curl request demonstrates the setting of the Authorization HTTP request header.</p>
+
+<p>curl -XGET -u my_api_key: <br>
+    {{ host }}/addresses/uprn/10012133622</p>
+
+<p>GET /addresses/uprn/10012133622 HTTP/1.1<br>
+Host: api.companieshouse.gov.uk<br>
+Authorization: Basic bXlfYXBpX2tleTo=</p>
+
+{% endblock %}

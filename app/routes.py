@@ -8,7 +8,7 @@ import requests
 import json
 
 
-def getSwagger():
+def get_swagger():
     try:
         response = requests.get(host + swagger_url)
         swagger_json = json.loads(response.text)
@@ -32,6 +32,11 @@ def quick_start():
 @app.route("/single")
 def single_match():
     return render_template('single-match.html')
+
+
+@app.route("/overview")
+def overview():
+    return render_template('overview.html')
 
 
 @app.route("/single/postcode", methods=['GET', 'POST'])
@@ -64,7 +69,7 @@ def postcode():
 
             return render_template('postcode.html',
                                    host=host,
-                                   swaggerJson=getSwagger(),
+                                   swaggerJson=get_swagger(),
                                    form=form,
                                    endpoint=endpoint,
                                    results=postcode_results,
@@ -89,7 +94,9 @@ def postcode():
 @app.route('/single/resource/postcode')
 def resource_postcode():
 
-    response = getSwagger()["definitions"]["uk.gov.ons.addressIndex.model.server.response.postcode.AddressByPostcodeResponse"]["properties"]
+    resource = "uk.gov.ons.addressIndex.model.server.response.postcode.AddressByPostcodeResponse"
+
+    response = get_swagger()["definitions"][resource]["properties"]
 
     resource_response = json.dumps(response, sort_keys=True, indent=4, separators=(',', ': '))
 
@@ -100,7 +107,22 @@ def resource_postcode():
 
 @app.route('/rate-limiting')
 def rate_limiting():
-    return render_template('ratelimiting.html', host=host)
+    return render_template('rate-limiting.html', host=host)
+
+
+@app.route('/getting-started')
+def getting_started():
+    return render_template('getting-started.html', host=host)
+
+
+@app.route('/authorisation')
+def authorisation():
+    return render_template('authorisation.html', host=host)
+
+
+@app.route('/developer-guidelines')
+def developer_guidelines():
+    return render_template('developer-guidelines.html', host=host)
 
 
 @app.route("/single/partial", methods=['GET', 'POST'])
@@ -135,7 +157,7 @@ def partial():
 
             return render_template('partial.html',
                                    host=host,
-                                   swaggerJson=getSwagger(),
+                                   swaggerJson=get_swagger(),
                                    form=form,
                                    endpoint=endpoint,
                                    results=address_results,
@@ -182,7 +204,7 @@ def uprn():
 
             return render_template('uprn.html',
                                    host=host,
-                                   swaggerJson=getSwagger(),
+                                   swaggerJson=get_swagger(),
                                    form=form,
                                    endpoint=endpoint,
                                    results=uprn_results,
@@ -254,7 +276,7 @@ def single_address():
 
             return render_template('single-address.html',
                                    host=host,
-                                   swaggerJson=getSwagger(),
+                                   swaggerJson=get_swagger(),
                                    form=form,
                                    endpoint=endpoint,
                                    results=address_results,

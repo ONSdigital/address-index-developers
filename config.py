@@ -5,5 +5,5 @@ class Config(object):
 
 # host = "http://addressindex-api-test.apps.devtest.onsclofo.uk"
 host = "0.0.0.0"
-port = 5000
+#port = 5000
 swagger_url = "/static/json/ai-swagger.json"

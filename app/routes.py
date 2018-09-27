@@ -1,13 +1,11 @@
 from flask import render_template, request
-from config import swagger_url, host, port
+from config import swagger_url
 
 from app import app
 from app.forms import commonForm
 
 import requests
 import json
-
-host = 'http://' + host + ':' + port
 
 
 def get_swagger():
@@ -58,7 +56,7 @@ def postcode():
             else:
                 offset = 0
 
-            uri = host + "/addresses/postcode/" + form.postcode.data
+            uri = "/addresses/postcode/" + form.postcode.data
             params = {'classificationfilter': form.classificationfilter.data,
                       'limit': limit,
                       'offset': offset,
@@ -108,22 +106,22 @@ def resource_postcode():
 
 @app.route('/rate-limiting')
 def rate_limiting():
-    return render_template('rate-limiting.html', host=host)
+    return render_template('rate-limiting.html')
 
 
 @app.route('/getting-started')
 def getting_started():
-    return render_template('getting-started.html', host=host)
+    return render_template('getting-started.html')
 
 
 @app.route('/authorisation')
 def authorisation():
-    return render_template('authorisation.html', host=host)
+    return render_template('authorisation.html')
 
 
 @app.route('/developer-guidelines')
 def developer_guidelines():
-    return render_template('developer-guidelines.html', host=host)
+    return render_template('developer-guidelines.html')
 
 
 @app.route("/single/partial", methods=['GET', 'POST'])
@@ -143,7 +141,7 @@ def partial():
         else:
             offset = 0
 
-        uri = host + "/addresses/partial/" + form.input.data
+        uri = "/addresses/partial/" + form.input.data
         params = {'classificationfilter': form.classificationfilter.data,
                   'limit': limit,
                   'offset': offset,
@@ -194,7 +192,7 @@ def uprn():
 
     if request.method == 'POST':
 
-        uri = host + "/addresses/uprn/" + form.uprn.data
+        uri = "/addresses/uprn/" + form.uprn.data
         params = {'historical': form.historical.data,
                   'verbose': form.verbose.data}
 
@@ -255,7 +253,7 @@ def single_address():
         else:
             matchthreshold = 5
 
-        uri = host + endpoint
+        uri = endpoint
         params = {'input': form.input.data,
                   'classificationfilter': form.classificationfilter.data,
                   'limit': limit,
@@ -314,4 +312,4 @@ def versions():
 
     version_list = json.loads(git_versions.text)
 
-    return render_template('versions.html', host=host, versions=version_list)
+    return render_template('versions.html', versions=version_list)

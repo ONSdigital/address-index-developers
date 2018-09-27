@@ -1,9 +1,10 @@
 import os
 
-class Config(object):
-   SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
 
-host = "http://addess-index-developers.apps.devtest.onsclofo.uk"
-#host = "0.0.0.0"
-#port = 5000
-swagger_url = "/static/json/ai-swagger.json"
+class Config(object):
+   SECRET_KEY = os.environ.get('SECRET_KEY')
+
+
+host = os.getenv('HOST')
+port = os.getenv('PORT')
+swagger_url = os.getenv('SWAGGER_URL')

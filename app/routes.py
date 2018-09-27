@@ -1,5 +1,5 @@
-from flask import Flask, render_template, redirect, request, flash
-from config import host, swagger_url
+from flask import render_template, request
+from config import swagger_url, host, port
 
 from app import app
 from app.forms import commonForm
@@ -7,16 +7,18 @@ from app.forms import commonForm
 import requests
 import json
 
+host = 'http://' + host + ':' + port
+
 
 def get_swagger():
     try:
-        response = requests.get(host + swagger_url)
+        response = requests.get(swagger_url)
         swagger_json = json.loads(response.text)
         return swagger_json
 
     except requests.ConnectionError as e:
         error = str(e)
-        return render_template('error.html', uri=host + swagger_url, error=error)
+        return render_template('error.html', swagger_url, error=error)
 
 
 @app.route("/")
@@ -68,7 +70,6 @@ def postcode():
             postcode_results = json.dumps(response.json(), sort_keys=True, indent=4, separators=(',', ': '))
 
             return render_template('postcode.html',
-                                   host=host,
                                    swaggerJson=get_swagger(),
                                    form=form,
                                    endpoint=endpoint,
@@ -78,14 +79,14 @@ def postcode():
     elif request.method == 'GET':
 
         try:
-            response = requests.get(host + swagger_url)
+            response = requests.get(swagger_url)
             swagger_json = json.loads(response.text)
-            return render_template('postcode.html', host=host, swaggerJson=swagger_json, form=form, endpoint=endpoint)
+            return render_template('postcode.html', swaggerJson=swagger_json, form=form, endpoint=endpoint)
 
         except requests.ConnectionError as e:
             error = str(e)
             return render_template('error.html',
-                                   uri=host + swagger_url,
+                                   uri=swagger_url,
                                    error=error,
                                    error_type="Connection Error",
                                    error_detail="Unable to connect to Swagger file")
@@ -156,7 +157,6 @@ def partial():
             address_results = json.dumps(response.json(), sort_keys=True, indent=4, separators=(',', ': '))
 
             return render_template('partial.html',
-                                   host=host,
                                    swaggerJson=get_swagger(),
                                    form=form,
                                    endpoint=endpoint,
@@ -166,7 +166,7 @@ def partial():
         except requests.ConnectionError as e:
             error = str(e)
             return render_template('error.html',
-                                   uri=host + swagger_url,
+                                   uri=swagger_url,
                                    error=error,
                                    error_type="Connection Error",
                                    error_detail="Unable to connect to Swagger file")
@@ -174,14 +174,14 @@ def partial():
     elif request.method == 'GET':
 
         try:
-            response = requests.get(host + swagger_url)
+            response = requests.get(swagger_url)
             swagger_json = json.loads(response.text)
-            return render_template('partial.html', host=host, swaggerJson=swagger_json, form=form, endpoint=endpoint)
+            return render_template('partial.html', swaggerJson=swagger_json, form=form, endpoint=endpoint)
 
         except requests.ConnectionError as e:
             error = str(e)
             return render_template('error.html',
-                                   uri=host + swagger_url,
+                                   uri=swagger_url,
                                    error=error,
                                    error_type="Connection Error",
                                    error_detail="Unable to connect to Swagger file")
@@ -203,7 +203,6 @@ def uprn():
             uprn_results = json.dumps(response.json(), sort_keys=True, indent=4, separators=(',', ': '))
 
             return render_template('uprn.html',
-                                   host=host,
                                    swaggerJson=get_swagger(),
                                    form=form,
                                    endpoint=endpoint,
@@ -213,7 +212,7 @@ def uprn():
         except requests.ConnectionError as e:
             error = str(e)
             return render_template('error.html',
-                                   uri=host + swagger_url,
+                                   uri=swagger_url,
                                    error=error,
                                    error_type="Connection Error",
                                    error_detail="Unable to connect to Swagger file")
@@ -221,14 +220,14 @@ def uprn():
     elif request.method == 'GET':
 
         try:
-            response = requests.get(host + swagger_url)
+            response = requests.get(swagger_url)
             swagger_json = json.loads(response.text)
-            return render_template('uprn.html', host=host, swaggerJson=swagger_json, form=form, endpoint=endpoint)
+            return render_template('uprn.html', swaggerJson=swagger_json, form=form, endpoint=endpoint)
 
         except requests.ConnectionError as e:
             error = str(e)
             return render_template('error.html',
-                                   uri=host + swagger_url,
+                                   uri=swagger_url,
                                    error=error,
                                    error_type="Connection Error",
                                    error_detail="Unable to connect to Swagger file")
@@ -275,7 +274,6 @@ def single_address():
             address_results = json.dumps(response.json(), sort_keys=True, indent=4, separators=(',', ': '))
 
             return render_template('single-address.html',
-                                   host=host,
                                    swaggerJson=get_swagger(),
                                    form=form,
                                    endpoint=endpoint,
@@ -285,7 +283,7 @@ def single_address():
         except requests.ConnectionError as e:
             error = str(e)
             return render_template('error.html',
-                                   uri=host + swagger_url,
+                                   uri=swagger_url,
                                    error=error,
                                    error_type="Connection Error",
                                    error_detail="Unable to connect to Swagger file")
@@ -293,10 +291,9 @@ def single_address():
     elif request.method == 'GET':
 
         try:
-            response = requests.get(host + swagger_url)
+            response = requests.get(swagger_url)
             swagger_json = json.loads(response.text)
             return render_template('single-address.html',
-                                   host=host,
                                    swaggerJson=swagger_json,
                                    form=form,
                                    endpoint=endpoint)
@@ -304,7 +301,7 @@ def single_address():
         except requests.ConnectionError as e:
             error = str(e)
             return render_template('error.html',
-                                   uri=host + swagger_url,
+                                   uri=swagger_url,
                                    error=error,
                                    error_type="Connection Error",
                                    error_detail="Unable to connect to Swagger file")

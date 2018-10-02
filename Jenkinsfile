@@ -24,11 +24,6 @@ pipeline {
 
         stage('Deploy') {
             agent { label 'deploy.cf' }
-            when {
-                branch "feature/deploy-to-cf"
-                // evaluate the when condition before entering this stage's agent, if any
-                beforeAgent true
-            }
             environment {
                 CREDS = 'ai_jenkins'
                 SPACE = 'dev'

@@ -39,10 +39,10 @@ pipeline {
             }
             post {
                 success {
-                    colourText("info", "Stage: ${env.STAGE_NAME} successful!")
+                    echo 'Successful'
                 }
                 failure {
-                    colourText("warn", "Stage: ${env.STAGE_NAME} failed!")
+                    echo 'Failed'
                 }
             }
         }

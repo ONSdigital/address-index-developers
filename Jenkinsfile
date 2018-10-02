@@ -29,9 +29,9 @@ pipeline {
             }
             steps {
                 cfPush {
-                    organization: "${this.env.ORG}",
-                    cloudSpace: "${this.env.SPACE}",
-                    credentialsId: "${this.env.CREDS}"
+                    organization: "ai",
+                    cloudSpace: "dev",
+                    credentialsId: "ai_jenkins"
                     manifestPath = "/manifest.yml"
                 }
             }

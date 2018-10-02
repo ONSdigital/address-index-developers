@@ -28,11 +28,13 @@ pipeline {
                 SPACE = 'dev'
             }
             steps {
-                cfPush {
-                    organization = "${this.env.ORG}"
-                    cloudSpace = "${this.env.SPACE}"
-                    credentialsId = "${this.env.CREDS}"
-                    manifestPath = "/manifest.yml"
+                script {
+                    cfDeploy {
+                        credentialsId = "${this.env.CREDS}"
+                        org = "${this.env.ORG}"
+                        space = "${this.env.SPACE}"
+                        manifestPath = "/manifest.yml"
+                    }
                 }
             }
             post {

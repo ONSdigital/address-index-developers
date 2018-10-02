@@ -29,7 +29,7 @@ pipeline {
             }
             steps {
                 script {
-                    cfDeploy {
+                    cfPush {
                         credentialsId = "${this.env.CREDS}"
                         org = "${this.env.ORG}"
                         space = "${this.env.SPACE}"

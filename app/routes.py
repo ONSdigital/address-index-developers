@@ -1,5 +1,5 @@
 from flask import render_template, request
-from config import swagger_url
+from config import swagger_url, api_url
 
 from app import app
 from app.forms import commonForm
@@ -56,7 +56,7 @@ def postcode():
             else:
                 offset = 0
 
-            uri = "/addresses/postcode/" + form.postcode.data
+            uri = api_url + "/addresses/postcode/" + form.postcode.data
             params = {'classificationfilter': form.classificationfilter.data,
                       'limit': limit,
                       'offset': offset,
@@ -141,7 +141,7 @@ def partial():
         else:
             offset = 0
 
-        uri = "/addresses/partial/" + form.input.data
+        uri = api_url + "/addresses/partial/" + form.input.data
         params = {'classificationfilter': form.classificationfilter.data,
                   'limit': limit,
                   'offset': offset,
@@ -192,7 +192,7 @@ def uprn():
 
     if request.method == 'POST':
 
-        uri = "/addresses/uprn/" + form.uprn.data
+        uri = api_url + "/addresses/uprn/" + form.uprn.data
         params = {'historical': form.historical.data,
                   'verbose': form.verbose.data}
 
@@ -253,7 +253,7 @@ def single_address():
         else:
             matchthreshold = 5
 
-        uri = endpoint
+        uri = api_url + endpoint
         params = {'input': form.input.data,
                   'classificationfilter': form.classificationfilter.data,
                   'limit': limit,

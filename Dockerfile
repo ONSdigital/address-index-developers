@@ -14,7 +14,9 @@ COPY . /app
 ENV FLASK_ENV development
 ENV PORT 5000
 ENV HOST='0.0.0.0'
-ENV SWAGGER_URL='https://raw.githubusercontent.com/ONSdigital/address-index-api/develop/api-definitions/ai-swagger.json'
+# host.docker.internal wouldn't be required if we run the API in another container
+ENV API_URL='http://host.docker.internal:9000'
+ENV SWAGGER_URL=$API_URL'/assets/swagger.json'
 ENV SECRET_KEY='you-will-never-guess'
 
 ENTRYPOINT [ "python" ]

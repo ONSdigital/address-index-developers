@@ -30,7 +30,7 @@ pipeline {
             steps {
                 script {
                     cfPush {
-                        target: 'https://api.system.devtest.onsclofo.uk',
+                        target: 'api.system.devtest.onsclofo.uk',
                         organization: '${this.env.ORG}',
                         cloudSpace: '${this.env.SPACE}',
                         credentialsId: '${this.env.CREDS}'

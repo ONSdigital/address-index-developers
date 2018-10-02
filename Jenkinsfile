@@ -58,16 +58,12 @@ pipeline {
     post {
         success {
             colourText("success", "All stages complete. Build was successful.")
-            )
         }
         unstable {
             colourText("warn", "Something went wrong, build finished with result ${currentResult}. This may be caused by failed tests, code violation or in some cases unexpected interrupt.")
-
-            )
         }
         failure {
             colourText("warn", "Process failed at: ${env.NODE_STAGE}")
-            )
         }
     }
 }

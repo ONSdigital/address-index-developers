@@ -23,19 +23,18 @@ pipeline {
         }
 
         stage('Deploy') {
-            agent { label 'deploy.cf' }
             environment {
                 CREDS = 'ai_jenkins'
                 SPACE = 'dev'
             }
             steps {
                 script {
-                    cfDeploy {
-                        credentialsId = "${this.env.CREDS}"
-                        org = "${this.env.ORG}"
-                        space = "${this.env.SPACE}"
-                        appName = ${this.env.SVC_NAME}
-                        manifestPath = "/manifest.yml"
+                    cfPush {
+                        target: 'https://api.system.devtest.onsclofo.uk',
+                        organization: '${this.env.ORG}',
+                        cloudSpace: '${this.env.SPACE}',
+                        credentialsId: '${this.env.CREDS}'
+                        manifestPath = '/manifest.yml'
                     }
                 }
             }

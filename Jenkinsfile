@@ -29,10 +29,10 @@ pipeline {
             }
             steps {
                 cfPush {
-                    organization: '${this.env.ORG}',
-                    cloudSpace: '${this.env.SPACE}',
-                    credentialsId: '${this.env.CREDS}'
-                    manifestPath = '/manifest.yml'
+                    organization: "${this.env.ORG}",
+                    cloudSpace: "${this.env.SPACE}",
+                    credentialsId: "${this.env.CREDS}"
+                    manifestPath = "/manifest.yml"
                 }
             }
             post {

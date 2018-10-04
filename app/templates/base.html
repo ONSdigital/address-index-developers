@@ -14,6 +14,7 @@
     <!--link rel="stylesheet" media="screen, print" href="{{ url_for('static', filename='css/styles.css') }}"-->
 
     <link rel="stylesheet" href="https://cdn.ons.gov.uk/sdc/v1.5.0/css/responsive.css">
+    <link rel="stylesheet" href="/static/address-index.css">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script src="https://cdn.ons.gov.uk/sdc/v1.5.0/scripts/bundle.min.js"></script>
 
@@ -78,6 +79,7 @@
                         </ul>
                     </li>
                     <li><a href="{{url_for('rate_limiting') }}">Rate Limiting</a></li>
+                    <li><a href="{{url_for('update_timeline') }}">Update Timeline</a></li>
                     <li><a href="{{url_for('versions') }}">Versions</a></li>
                 </ul>
             </nav>

@@ -10,7 +10,7 @@
 
 <h2 class="saturn">Request</h2>
 
-<p>GET {{ host }}{{ endpoint }}</p>
+<p><code>GET {{ api_url }}{{ endpoint }}</code></p>
 
 <h3 class="neptune">Query parameters</h3>
 
@@ -45,33 +45,33 @@
 
 <h3 class="neptune">Request headers</h3>
 
-<p>This method does not require specific header parameters.</p>
+{% block endpoint_request_headers %}<p>This method does not require specific header parameters.</p>{% endblock %}
 
 <h3 class="neptune">Request body</h3>
 
-<p>This method does not take any request body parameters.</p>
+{% block endpoint_request_body %}<p>This method does not take any request body parameters.</p>{% endblock %}
 
 <h3 class="neptune">Authentication</h3>
 
-<p>Not required.</p>
+{% block endpoint_authentication %}<p>Not required.</p>{% endblock %}
 
 <h2 class="saturn">Response</h2>
 
 <h3>Response headers</h3>
 
-<p>This method does not return specific response headers.</p>
+{% block endpoint_response_headers %}<p>This method does not return specific response headers.</p>{% endblock %}
 
 <h3>Response body</h3>
 
-<p>If successful, this method returns a CompanySearch resource in the body.</p>
+{% block endpoint_response_body %}<p>If successful, this method returns a CompanySearch resource in the body.</p>{% endblock %}
 
 <h3>Status codes</h3>
 
-<p>None.</p>
+{% block endpoint_status_codes %}<p>None.</p>{% endblock %}
 
 <h2>CURL example</h2>
 
-<p>curl -uYOUR_APIKEY_FOLLOWED_BY_A_COLON: {{ host }}/search/companies</p>
+<p><code>curl -uYOUR_APIKEY_FOLLOWED_BY_A_COLON: {{ api_url }}{{ endpoint }}</code></p>
 
 <h2>Explore this API</h2>
 
@@ -99,10 +99,6 @@
 
 <pre>{{ results }}</pre>
 
-
-<p>To explore this api, you must be signed in and have registered for at least one API key. Registration takes a few seconds, and allows you to explore the API from right here in the web page!</p>
-
-<p>You can create an API key through Your Applications page.</p>
 
 
 {% endblock %}

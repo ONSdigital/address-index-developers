@@ -24,7 +24,7 @@ def home():
     return render_template('home.html')
 
 
-@app.route("/quickstart")
+@app.route("/quick-start")
 def quick_start():
     return render_template('quick-start.html')
 
@@ -32,11 +32,6 @@ def quick_start():
 @app.route("/single")
 def single_match():
     return render_template('single-match.html')
-
-
-@app.route("/overview")
-def overview():
-    return render_template('overview.html')
 
 
 @app.route("/single/postcode", methods=['GET', 'POST'])
@@ -68,6 +63,7 @@ def postcode():
             postcode_results = json.dumps(response.json(), sort_keys=True, indent=4, separators=(',', ': '))
 
             return render_template('postcode.html',
+                                   api_url=api_url,
                                    swaggerJson=get_swagger(),
                                    form=form,
                                    endpoint=endpoint,
@@ -79,7 +75,7 @@ def postcode():
         try:
             response = requests.get(swagger_url)
             swagger_json = json.loads(response.text)
-            return render_template('postcode.html', swaggerJson=swagger_json, form=form, endpoint=endpoint)
+            return render_template('postcode.html', api_url=api_url, swaggerJson=swagger_json, form=form, endpoint=endpoint)
 
         except requests.ConnectionError as e:
             error = str(e)
@@ -124,6 +120,11 @@ def developer_guidelines():
     return render_template('developer-guidelines.html')
 
 
+@app.route('/update-timeline')
+def update_timeline():
+    return render_template('update-timelines.html')
+
+
 @app.route("/single/partial", methods=['GET', 'POST'])
 def partial():
     form = commonForm()
@@ -155,6 +156,7 @@ def partial():
             address_results = json.dumps(response.json(), sort_keys=True, indent=4, separators=(',', ': '))
 
             return render_template('partial.html',
+                                   api_url=api_url,
                                    swaggerJson=get_swagger(),
                                    form=form,
                                    endpoint=endpoint,
@@ -174,7 +176,11 @@ def partial():
         try:
             response = requests.get(swagger_url)
             swagger_json = json.loads(response.text)
-            return render_template('partial.html', swaggerJson=swagger_json, form=form, endpoint=endpoint)
+            return render_template('partial.html',
+                                   api_url=api_url,
+                                   swaggerJson=swagger_json,
+                                   form=form,
+                                   endpoint=endpoint)
 
         except requests.ConnectionError as e:
             error = str(e)
@@ -201,6 +207,7 @@ def uprn():
             uprn_results = json.dumps(response.json(), sort_keys=True, indent=4, separators=(',', ': '))
 
             return render_template('uprn.html',
+                                   api_url=api_url,
                                    swaggerJson=get_swagger(),
                                    form=form,
                                    endpoint=endpoint,
@@ -220,7 +227,11 @@ def uprn():
         try:
             response = requests.get(swagger_url)
             swagger_json = json.loads(response.text)
-            return render_template('uprn.html', swaggerJson=swagger_json, form=form, endpoint=endpoint)
+            return render_template('uprn.html',
+                                   api_url=api_url,
+                                   swaggerJson=swagger_json,
+                                   form=form,
+                                   endpoint=endpoint)
 
         except requests.ConnectionError as e:
             error = str(e)
@@ -272,6 +283,7 @@ def single_address():
             address_results = json.dumps(response.json(), sort_keys=True, indent=4, separators=(',', ': '))
 
             return render_template('single-address.html',
+                                   api_url=api_url,
                                    swaggerJson=get_swagger(),
                                    form=form,
                                    endpoint=endpoint,
@@ -292,6 +304,7 @@ def single_address():
             response = requests.get(swagger_url)
             swagger_json = json.loads(response.text)
             return render_template('single-address.html',
+                                   api_url=api_url,
                                    swaggerJson=swagger_json,
                                    form=form,
                                    endpoint=endpoint)

@@ -34,6 +34,11 @@ def single_match():
     return render_template('single-match.html')
 
 
+@app.route("/code-samples")
+def code_samples():
+    return render_template('code-samples.html')
+
+
 @app.route("/single/postcode", methods=['GET', 'POST'])
 def postcode():
     form = commonForm()

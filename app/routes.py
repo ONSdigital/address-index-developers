@@ -91,20 +91,6 @@ def postcode():
                                    error_detail="Unable to connect to Swagger file")
 
 
-@app.route('/single/resource/postcode')
-def resource_postcode():
-
-    resource = "uk.gov.ons.addressIndex.model.server.response.postcode.AddressByPostcodeResponse"
-
-    response = get_swagger()["definitions"][resource]["properties"]
-
-    resource_response = json.dumps(response, sort_keys=True, indent=4, separators=(',', ': '))
-
-    swagger_json = resource_response
-
-    return render_template('resource-postcode.html', swaggerJson=swagger_json)
-
-
 @app.route('/rate-limiting')
 def rate_limiting():
     return render_template('rate-limiting.html')

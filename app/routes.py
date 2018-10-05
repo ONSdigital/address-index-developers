@@ -2,7 +2,7 @@ from flask import render_template, request
 from config import swagger_url, api_url
 
 from app import app
-from app.forms import commonForm
+from app.forms import commonForm, simpleForm
 
 import requests
 import json
@@ -37,6 +37,53 @@ def single_match():
 @app.route("/code-samples")
 def code_samples():
     return render_template('code-samples.html')
+
+
+@app.route("/endpoints/<endpoint_list>")
+def endpoint_lists(endpoint_list):
+    endpoint = "/" + endpoint_list
+    return render_template('base-endpoints-list.html',
+                           swaggerJson=get_swagger(),
+                           endpoint=endpoint)
+
+
+@app.route("/endpoints/codelists/<codelist>", methods=['GET', 'POST'])
+def codelists(codelist):
+    form = simpleForm()
+    endpoint = "/codelists/" + codelist
+
+    if request.method == 'POST':
+
+        uri = api_url + endpoint
+        response = requests.get(uri)
+        results = json.dumps(response.json(), sort_keys=True, indent=4, separators=(',', ': '))
+
+        return render_template('base-endpoints.html',
+                               api_url=api_url,
+                               swaggerJson=get_swagger(),
+                               form=form,
+                               endpoint=endpoint,
+                               results=results,
+                               request=request)
+
+    elif request.method == 'GET':
+
+        try:
+            response = requests.get(swagger_url)
+            swagger_json = json.loads(response.text)
+            return render_template('base-endpoints.html',
+                                   api_url=api_url,
+                                   swaggerJson=swagger_json,
+                                   endpoint=endpoint,
+                                   form=form)
+
+        except requests.ConnectionError as e:
+            error = str(e)
+            return render_template('error.html',
+                                   uri=swagger_url,
+                                   error=error,
+                                   error_type="Connection Error",
+                                   error_detail="Unable to connect to Swagger file")
 
 
 @app.route("/single/postcode", methods=['GET', 'POST'])

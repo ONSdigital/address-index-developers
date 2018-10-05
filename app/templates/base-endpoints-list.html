@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Endpoint: {{ endpoint }}{% endblock %}
+
+{% block content %}
+
+<h1 class="jupiter">{{ endpoint }}</h1>
+
+<p>{{ swaggerJson.paths[endpoint]["get"]["summary"] }}</p>
+
+<div class="documentation">
+
+    <table class="table">
+        <thead class="table--head">
+        <th scope="col" class="table--header--cell">Endpoint</th>
+        <th scope="col" class="table--header--cell">Description</th>
+        </thead>
+        <tbody>
+
+        {% for endpoint_entry, endpoint_entry_text in swaggerJson.paths.items() %}
+
+        {% if endpoint in endpoint_entry and endpoint != endpoint_entry %}
+
+        <tr class="table--row">
+            <td class="table--cell"><a href="{{url_for('endpoint_lists', endpoint_list=endpoint_entry.lstrip('/')) }}">{{ endpoint_entry }}</a></td>
+            <td class="table--cell">{{ endpoint_entry_text["get"]["summary"] }}</td>
+        </tr>
+
+        {% endif %}
+
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+</div>
+
+
+{% endblock %}
+

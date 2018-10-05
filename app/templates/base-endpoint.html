@@ -10,7 +10,7 @@
 
 <h2 class="saturn">Request</h2>
 
-<p><code>GET #API_URL#{{ endpoint }}</code></p>
+<p class="documentation"><code>GET #API_URL#{{ endpoint }}</code></p>
 
 <h3 class="neptune">Query parameters</h3>
 
@@ -43,37 +43,23 @@
     </tbody>
 </table>
 
-<h3 class="neptune">Request headers</h3>
 
-{% block endpoint_request_headers %}<p>This method does not require specific header parameters.</p>{% endblock %}
+<h2 class="saturn">Responses</h2>
 
-<h3 class="neptune">Request body</h3>
+{% for responseCode, responseValue in swaggerJson.paths[endpoint]["get"]["responses"].items() %}
+    <h3 class="neptune">{{responseCode}}</h3>
+    <p>{{responseValue["description"]}}</p>
+{% endfor %}
 
-{% block endpoint_request_body %}<p>This method does not take any request body parameters.</p>{% endblock %}
 
-<h3 class="neptune">Authentication</h3>
+<h2 class="saturn">CURL example</h2>
 
-{% block endpoint_authentication %}<p>Not required.</p>{% endblock %}
+<div class="markdown">
+    <pre><code>curl -uYOUR_APIKEY_FOLLOWED_BY_A_COLON: #API_URL#{{ endpoint }}</code></pre>
+</div>
 
-<h2 class="saturn">Response</h2>
 
-<h3>Response headers</h3>
-
-{% block endpoint_response_headers %}<p>This method does not return specific response headers.</p>{% endblock %}
-
-<h3>Response body</h3>
-
-{% block endpoint_response_body %}<p>If successful, this method returns a CompanySearch resource in the body.</p>{% endblock %}
-
-<h3>Status codes</h3>
-
-{% block endpoint_status_codes %}<p>None.</p>{% endblock %}
-
-<h2>CURL example</h2>
-
-<p><code>curl -uYOUR_APIKEY_FOLLOWED_BY_A_COLON: #API_URL#{{ endpoint }}</code></p>
-
-<h2>Explore this API</h2>
+<h2 class="saturn">Explore this API</h2>
 
 
 <form action="" method="post" novalidate>
@@ -97,8 +83,13 @@
 
 </form>
 
-<pre>{{ results }}</pre>
+{% if results %}
 
+<div class="markdown">
+    <pre><code>{{ results }}</code></pre>
+</div>
+
+{% endif %}
 
 
 {% endblock %}

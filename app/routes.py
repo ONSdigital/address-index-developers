@@ -39,30 +39,33 @@ def code_samples():
     return render_template('code-samples.html')
 
 
-@app.route("/endpoints/<endpoint_list>")
-def endpoint_lists(endpoint_list):
-    endpoint = "/" + endpoint_list
+@app.route("/endpoints")
+def endpoint_lists():
     return render_template('base-endpoints-list.html',
-                           swaggerJson=get_swagger(),
-                           endpoint=endpoint)
+                           swaggerJson=get_swagger())
 
 
-@app.route("/endpoints/codelists/<codelist>", methods=['GET', 'POST'])
-def codelists(codelist):
-    form = simpleForm()
-    endpoint = "/codelists/" + codelist
+@app.route("/endpoints/<path:endpoint_path>", methods=['GET', 'POST'])
+def endpoints(endpoint_path):
+    form = commonForm()
+    endpoint_value = "/" + endpoint_path
 
     if request.method == 'POST':
 
-        uri = api_url + endpoint
-        response = requests.get(uri)
+        if "{" in endpoint_value:
+            uri = api_url + endpoint_value.split("{")[0] + form[endpoint_value.split("{")[1].split("}")[0]].data
+
+        else:
+            uri = api_url + endpoint_value
+
+        response = requests.get(uri, params=form.data)
         results = json.dumps(response.json(), sort_keys=True, indent=4, separators=(',', ': '))
 
         return render_template('base-endpoints.html',
                                api_url=api_url,
                                swaggerJson=get_swagger(),
                                form=form,
-                               endpoint=endpoint,
+                               endpoint=endpoint_value,
                                results=results,
                                request=request)
 
@@ -74,7 +77,7 @@ def codelists(codelist):
             return render_template('base-endpoints.html',
                                    api_url=api_url,
                                    swaggerJson=swagger_json,
-                                   endpoint=endpoint,
+                                   endpoint=endpoint_value,
                                    form=form)
 
         except requests.ConnectionError as e:

@@ -65,22 +65,7 @@
                     <li><a href="{{url_for('quick_start') }}">Quick Start</a></li>
                     <li><a href="{{url_for('authorisation') }}">Authorisation</a></li>
                     <li><a href="{{ url_for('developer_guidelines') }}">Developer Guidelines</a></li>
-                    <li><a href="{{url_for('single_match') }}">Single Match</a>
-                        <ul>
-                            <li><a href="{{url_for('single_address') }}">Address</a></li>
-                            <li><a href="{{url_for('uprn') }}">UPRN</a></li>
-                            <li><a href="{{url_for('postcode') }}">Postcode</a></li>
-                            <li><a href="{{url_for('partial') }}">Partial</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="{{url_for('endpoint_lists', endpoint_list='codelists') }}">Codelists</a>
-                        <ul>
-                            <li><a href="{{url_for('codelists', codelist='source') }}">Source</a></li>
-                            <li><a href="{{url_for('codelists', codelist='classification') }}">Classification</a></li>
-                            <li><a href="{{url_for('codelists', codelist='custodian') }}">Custodian</a></li>
-                            <li><a href="{{url_for('codelists', codelist='logicalstatus') }}">Logical Status</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="{{url_for('endpoint_lists') }}">Endpoints</a></li>
                     <li><a href="{{url_for('rate_limiting') }}">Rate Limiting</a></li>
                     <li><a href="{{url_for('update_timeline') }}">Update Timeline</a></li>
                     <li><a href="{{url_for('versions') }}">Versions</a></li>

@@ -33,22 +33,22 @@
     <tbody>
 
     <tr class="table--row">
-        <td class="table--cell"><a href="{{ url_for('single_address') }}">Address Search</a></td>
+        <td class="table--cell"><a href="{{ url_for('endpoints', endpoint_path='addresses') }}">Address Search</a></td>
         <td class="table--cell"><pre class="code">GET /addresses</pre></td>
         <td class="table--cell">Search for addresses</td>
     </tr>
     <tr class="table--row">
-        <td class="table--cell"><a href="{{ url_for('uprn') }}">UPRN Search</a></td>
+        <td class="table--cell"><a href="{{ url_for('endpoints', endpoint_path='addresses/uprn/{uprn}') }}">UPRN Search</a></td>
         <td class="table--cell"><pre class="code">GET /addresses/uprn</pre></td>
         <td class="table--cell">Search for address by UPRN</td>
     </tr>
     <tr class="table--row">
-        <td class="table--cell"><a href="{{ url_for('postcode') }}">Postcode Search</a></td>
+        <td class="table--cell"><a href="{{ url_for('endpoints', endpoint_path='addresses/postcode/{postcode}') }}">Postcode Search</a></td>
         <td class="table--cell"><pre class="code">GET /addresses/postcode</pre></td>
         <td class="table--cell">Search for addresses by postcode</td>
     </tr>
     <tr class="table--row">
-        <td class="table--cell"><a href="{{ url_for('partial') }}">Partial Search</a></td>
+        <td class="table--cell"><a href="{{ url_for('endpoints', endpoint_path='addresses/partial/{partial}') }}">Partial Search</a></td>
         <td class="table--cell"><pre class="code">GET /addresses/partial</pre></td>
         <td class="table--cell">Search for addresses by partial search term</td>
     </tr>
@@ -56,6 +56,6 @@
     </tbody>
 </table>
 
-<p>For full documentation regarding these resource URIs, see the <a href="{{ url_for('single_match') }}">Single Match</a> page.</p>
+<p>For full documentation regarding these resource URIs, see the <a href="{{ url_for('endpoint_lists') }}">Endpoints</a> page.</p>
 
 {% endblock %}

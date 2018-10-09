@@ -20,5 +20,3 @@ class commonForm(FlaskForm):
     bodyquery = TextAreaField('Body')
     submit = SubmitField('Search')
 
-class simpleForm(FlaskForm):
-    submit = SubmitField('Get')

@@ -71,6 +71,11 @@
 
         <table class="table">
             <tbody>
+            <tr class="table--row">
+                <td class="table--cell">Body query</td>
+                <td class="table--cell">{{ form.bodyquery(cols="60", rows="8", class_="input input--textarea js-charlimit-input", maxlength_="5000") }}</td>
+                <td class="table--cell">Body query, in JSON format</td>
+            </tr>
             {% for singleParameterPost in swaggerJson.paths[endpoint]["post"]["parameters"] %}
             <tr class="table--row">
                 <td class="table--cell">{{ singleParameterPost.name }}</td>

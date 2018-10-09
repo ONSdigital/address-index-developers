@@ -54,12 +54,25 @@ def endpoints(endpoint_path):
 
         if "{" in endpoint_value:
             uri = api_url + endpoint_value.split("{")[0] + form[endpoint_value.split("{")[1].split("}")[0]].data
-
         else:
             uri = api_url + endpoint_value
 
-        response = requests.get(uri, params=form.data)
-        results = json.dumps(response.json(), sort_keys=True, indent=4, separators=(',', ': '))
+        if form.bodyquery.data:
+            header = {"Content-Type": "application/json"}
+            try:
+                response = requests.post(uri, data=form.bodyquery.data, params=form.data, headers=header)
+                response.raise_for_status()
+                results = json.dumps(response.json(), sort_keys=True, indent=4, separators=(',', ': '))
+            except requests.exceptions.RequestException as e:
+                results = e
+        else:
+            try:
+                response = requests.get(uri, params=form.data)
+                print(response)
+                response.raise_for_status()
+                results = json.dumps(response.json(), sort_keys=True, indent=4, separators=(',', ': '))
+            except requests.exceptions.RequestException as e:
+                results = e
 
         return render_template('base-endpoints.html',
                                api_url=api_url,

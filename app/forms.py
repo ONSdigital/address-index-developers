@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 
-from wtforms import StringField, SubmitField
+from wtforms import StringField, SubmitField, TextAreaField
 
 class commonForm(FlaskForm):
     input = StringField('Input')
@@ -17,6 +17,7 @@ class commonForm(FlaskForm):
     lon = StringField('Longitude')
     startdate = StringField('Start Date')
     enddate = StringField('End Date')
+    bodyquery = TextAreaField('Body')
     submit = SubmitField('Search')
 
 class simpleForm(FlaskForm):

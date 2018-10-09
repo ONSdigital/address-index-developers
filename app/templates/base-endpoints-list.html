@@ -18,7 +18,7 @@
         </thead>
         <tbody>
 
-        {% for endpoint_entry, endpoint_entry_text in swaggerJson.paths.items() %}
+        {% for endpoint_entry, endpoint_entry_text in swaggerJson.paths.items()|sort() %}
 
         <tr class="table--row">
             <td class="table--cell">{% if endpoint_entry_text["post"] %}POST{% elif endpoint_entry_text["get"] %}GET{% endif %}</td>

@@ -6,26 +6,28 @@
 
 <h1 class="jupiter">{{ endpoint }}</h1>
 
-<p>{{ swaggerJson.paths[endpoint]["get"]["summary"] }}</p>
+{% if swaggerJson.paths[endpoint]["post"] %}
 
-<h2 class="saturn">Request</h2>
+    <p>{{ swaggerJson.paths[endpoint]["post"]["summary"] }}</p>
 
-<p class="documentation"><code>GET {{ endpoint }}</code></p>
+    <h2 class="saturn">Request</h2>
 
-{% if swaggerJson.paths[endpoint]["get"]["parameters"] %}
+    <p class="documentation"><code>POST {{ endpoint }}</code></p>
 
-<h3 class="neptune">Query parameters</h3>
+    {% if swaggerJson.paths[endpoint]["post"]["parameters"] %}
 
-<table class="table">
-    <thead class="table--head">
+    <h3 class="neptune">Query parameters</h3>
+
+    <table class="table">
+        <thead class="table--head">
         <th scope="col" class="table--header--cell">Parameter name</th>
         <th scope="col" class="table--header--cell">Value</th>
         <th scope="col" class="table--header--cell">Description</th>
         <th scope="col" class="table--header--cell">Additional</th>
-    </thead>
-    <tbody>
+        </thead>
+        <tbody>
 
-    {% for singleParameter in swaggerJson.paths[endpoint]["get"]["parameters"] %}
+        {% for singleParameter in swaggerJson.paths[endpoint]["post"]["parameters"] %}
         {% if singleParameter.in == "query" %}
         <tr class="table--row">
             <td class="table--cell">{{ singleParameter.name }}</td>
@@ -38,68 +40,165 @@
             </td>
         </tr>
         {% endif %}
-    {% endfor %}
-
-
-
-    </tbody>
-</table>
-
-{% endif %}
-
-
-<h2 class="saturn">Responses</h2>
-
-{% for responseCode, responseValue in swaggerJson.paths[endpoint]["get"]["responses"].items() %}
-    <h3 class="neptune">{{responseCode}}</h3>
-    <p>{{responseValue["description"]}}</p>
-{% endfor %}
-
-
-<h2 class="saturn">CURL example</h2>
-
-<div class="markdown">
-    <pre><code>curl -uYOUR_APIKEY_FOLLOWED_BY_A_COLON: #API_URL#{{ endpoint }}</code></pre>
-</div>
-
-
-<h2 class="saturn">Explore this endpoint</h2>
-
-
-<form action="" method="post" novalidate>
-
-    {{ form.hidden_tag() }}
-
-    {% if swaggerJson.paths[endpoint]["get"]["parameters"] %}
-
-    <table class="table">
-        <tbody>
-        {% for singleParameter in swaggerJson.paths[endpoint]["get"]["parameters"] %}
-        <tr class="table--row">
-            <td class="table--cell">{{ singleParameter.name }}</td>
-            <td class="table--cell"><input name="{{ singleParameter.name }}" class="input input--text" id="{{ singleParameter.name }}" type="text" value=""></td>
-            <td class="table--cell">{{ singleParameter.description }}</td>
-        </tr>
         {% endfor %}
-        <tr class="table--row">
-            <td class="table--cell" colspan="3">{{ form.submit(class_='btn') }}</td>
-        </tr>
+
         </tbody>
     </table>
 
-    {% else %}
+    {% endif %}
 
-    {{ form.submit(class_='btn') }}
+    <h2 class="saturn">Responses</h2>
+
+    {% for responseCode, responseValue in swaggerJson.paths[endpoint]["post"]["responses"].items() %}
+        <h3 class="neptune">{{responseCode}}</h3>
+        <p>{{responseValue["description"]}}</p>
+    {% endfor %}
+
+    <h2 class="saturn">CURL example</h2>
+
+    <div class="markdown">
+        <pre><code>curl -uYOUR_APIKEY_FOLLOWED_BY_A_COLON: #API_URL#{{ endpoint }}</code></pre>
+    </div>
+
+    <h2 class="saturn">Explore this endpoint</h2>
+
+
+    <form action="" method="post" novalidate>
+
+        {{ form.hidden_tag() }}
+
+        {% if swaggerJson.paths[endpoint]["post"]["parameters"] %}
+
+        <table class="table">
+            <tbody>
+            <tr class="table--row">
+                <td class="table--cell">Body query</td>
+                <td class="table--cell">{{ form.bodyquery(cols="60", rows="8", class_="input input--textarea js-charlimit-input", maxlength_="5000") }}</td>
+                <td class="table--cell">Body query, in JSON format</td>
+            </tr>
+            {% for singleParameterPost in swaggerJson.paths[endpoint]["post"]["parameters"] %}
+            <tr class="table--row">
+                <td class="table--cell">{{ singleParameterPost.name }}</td>
+                <td class="table--cell"><input name="{{ singleParameterPost.name }}" class="input input--text" id="{{ singleParameterPost.name }}" type="text" {% if singleParameterPost.default or singleParameterPost.default == 0 %}value="{{ singleParameterPost.default }}"{% else %} value="" {%endif%}></td>
+                <td class="table--cell">{{ singleParameterPost.description }}</td>
+            </tr>
+            {% endfor %}
+            <tr class="table--row">
+                <td class="table--cell" colspan="3">{{ form.submit(class_='btn') }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        {% else %}
+
+        {{ form.submit(class_='btn') }}
+
+        {% endif %}
+
+    </form>
+
+    {% if results %}
+
+    <div class="markdown">
+        <pre><code>{{ results }}</code></pre>
+    </div>
 
     {% endif %}
 
-</form>
 
-{% if results %}
+{% else %}
 
-<div class="markdown">
-    <pre><code>{{ results }}</code></pre>
-</div>
+    <p>{{ swaggerJson.paths[endpoint]["get"]["summary"] }}</p>
+
+    <h2 class="saturn">Request</h2>
+
+    <p class="documentation"><code>GET {{ endpoint }}</code></p>
+
+    {% if swaggerJson.paths[endpoint]["get"]["parameters"] %}
+
+    <h3 class="neptune">Query parameters</h3>
+
+    <table class="table">
+        <thead class="table--head">
+        <th scope="col" class="table--header--cell">Parameter name</th>
+        <th scope="col" class="table--header--cell">Value</th>
+        <th scope="col" class="table--header--cell">Description</th>
+        <th scope="col" class="table--header--cell">Additional</th>
+        </thead>
+        <tbody>
+
+        {% for singleParameter in swaggerJson.paths[endpoint]["get"]["parameters"] %}
+        {% if singleParameter.in == "query" %}
+        <tr class="table--row">
+            <td class="table--cell">{{ singleParameter.name }}</td>
+            <td class="table--cell">{{ singleParameter.type }}</td>
+            <td class="table--cell">{{ singleParameter.description }}</td>
+            <td class="table--cell">
+                {% if singleParameter.required == False %}Optional{% else %}Required{% endif %}
+                {% if singleParameter.default or singleParameter.default == False %}<br>Default: {{ singleParameter.default }}{% endif %}
+                {% if singleParameter.maximum or singleParameter.maximum == False %}<br>Maximum: {{ singleParameter.maximum }}{% endif %}
+            </td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+    {% endif %}
+
+    <h2 class="saturn">Responses</h2>
+
+    {% for responseCode, responseValue in swaggerJson.paths[endpoint]["get"]["responses"].items() %}
+        <h3 class="neptune">{{responseCode}}</h3>
+        <p>{{responseValue["description"]}}</p>
+    {% endfor %}
+
+    <h2 class="saturn">CURL example</h2>
+
+    <div class="markdown">
+        <pre><code>curl -uYOUR_APIKEY_FOLLOWED_BY_A_COLON: #API_URL#{{ endpoint }}</code></pre>
+    </div>
+
+    <h2 class="saturn">Explore this endpoint</h2>
+
+
+    <form action="" method="post" novalidate>
+
+        {{ form.hidden_tag() }}
+
+        {% if swaggerJson.paths[endpoint]["get"]["parameters"] %}
+
+        <table class="table">
+            <tbody>
+            {% for singleParameter in swaggerJson.paths[endpoint]["get"]["parameters"] %}
+            <tr class="table--row">
+                <td class="table--cell">{{ singleParameter.name }}</td>
+                <td class="table--cell"><input name="{{ singleParameter.name }}" class="input input--text" id="{{ singleParameter.name }}" type="text" {% if singleParameter.default or singleParameter.default == 0 %}value="{{ singleParameter.default }}"{% else %} value="" {%endif%}></td>
+                <td class="table--cell">{{ singleParameter.description }}</td>
+            </tr>
+            {% endfor %}
+            <tr class="table--row">
+                <td class="table--cell" colspan="3">{{ form.submit(class_='btn') }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        {% else %}
+
+        {{ form.submit(class_='btn') }}
+
+        {% endif %}
+
+    </form>
+
+    {% if results %}
+
+    <div class="markdown">
+        <pre><code>{{ results }}</code></pre>
+    </div>
+
+    {% endif %}
 
 {% endif %}
 

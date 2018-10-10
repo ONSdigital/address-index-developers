@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Sample Queries{% endblock %}
+
+{% block content %}
+
+<h1 class="jupiter">Sample Queries</h1>
+
+<div class="panel panel--simple panel--info panel--spacious" style="margin: 0 0 20px 0;">
+    <div class="panel__body">
+        <h2 class="venus">Data limitations - the Exeter subset</h2>
+        <p>This private Beta version of the Address Index API Developers site runs against a subset of Address Base, namely the Exeter subset. As a result only addresses within the Exeter subset can be searched and returned by the 'Explore this endpoint' function.</p>
+        <p>To aid usage of the 'Explore the endpoint' functions, the below sample queries have been provided as a starting point.</p>
+        <p>The full API does not contain this restriction. It is expected that the Developers site will have access to the full index when it completes the private Beta stage. </p>
+    </div>
+</div>
+
+<h2 class="saturn">Addresses</h2>
+
+<p>The following examples will return results from the <a href="{{ url_for('endpoints', endpoint_path='addresses') }}">/addresses</a> endpoint when entered into the 'input' field</p>
+
+<p><pre>7 Gate Reach, Exeter</pre></p>
+<p><pre>University Of Exeter</pre></p>
+<p><pre>coffee</pre></p>
+
+<h2 class="saturn">Partial</h2>
+
+<p>The following examples will return results from the <a href="{{ url_for('endpoints', endpoint_path='addresses/partial/{input}') }}">/addresses/partial/{input}</a> endpoint when entered into the 'input' field</p>
+
+<p><pre>7 Gate Re</pre></p>
+<p><pre>4 EX26GA</pre></p>
+
+<h2 class="saturn">Postcode</h2>
+
+<p>The following examples will return results from the <a href="{{ url_for('endpoints', endpoint_path='addresses/postcode/{postcode}') }}">/addresses/postcode/{postcode}</a> endpoint when entered into the 'postcode' field</p>
+
+<p><pre>EX2 6GA</pre></p>
+<p><pre>ex26ga</pre></p>
+<p><pre>EX1 1LL</pre></p>
+
+<h2 class="saturn">UPRN</h2>
+
+<p>The following examples will return results from the <a href="{{ url_for('endpoints', endpoint_path='addresses/uprn/{uprn}') }}">/addresses/uprn/{uprn}</a> endpoint when entered into the 'uprn' field</p>
+
+<p><pre>10013049457</pre></p>
+<p><pre>10023123829</pre></p>
+<p><pre>10023122457</pre></p>
+
+<h2 class="saturn">Bulk</h2>
+
+<p>The following example will return results from the <a href="{{ url_for('endpoints', endpoint_path='bulk') }}">/bulk</a> endpoint when entered into the 'body query' field</p>
+
+<p><pre>{
+    "addresses": [{
+        "id": "1",
+        "address": "4 Gate Reach, Exeter, EX2 6GA"
+    },{
+        "id": "2",
+        "address": "Costa Coffee, 12 Bedford Street, Exeter, EX1 1LL"
+    }]
+}
+</pre></p>
+
+
+{% endblock %}

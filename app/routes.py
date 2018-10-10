@@ -58,14 +58,23 @@ def endpoints(endpoint_path):
                 response = requests.post(uri, data=form.bodyquery.data, params=form.data, headers=header)
                 response.raise_for_status()
                 results = json.dumps(response.json(), sort_keys=True, indent=4, separators=(',', ': '))
+            except requests.exceptions.HTTPError as e:
+                if e.response.status_code == 400:
+                    results = json.dumps(response.json(), sort_keys=True, indent=4, separators=(',', ': '))
+                else:
+                    results = e
             except requests.exceptions.RequestException as e:
                 results = e
         else:
             try:
                 response = requests.get(uri, params=form.data)
-                print(response)
                 response.raise_for_status()
                 results = json.dumps(response.json(), sort_keys=True, indent=4, separators=(',', ': '))
+            except requests.exceptions.HTTPError as e:
+                if e.response.status_code == 400:
+                    results = json.dumps(response.json(), sort_keys=True, indent=4, separators=(',', ': '))
+                else:
+                    results = e
             except requests.exceptions.RequestException as e:
                 results = e
 
@@ -115,6 +124,11 @@ def authorisation():
 @app.route('/developer-guidelines')
 def developer_guidelines():
     return render_template('developer-guidelines.html')
+
+
+@app.route('/sample-queries')
+def sample_queries():
+    return render_template('sample-queries.html')
 
 
 @app.route('/update-timeline')

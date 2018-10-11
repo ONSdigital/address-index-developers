@@ -13,6 +13,8 @@
 
     <p>#API_URL# and #API_KEY# should be replaced with the actual values, appropriate to the environment and user.</p>
 
+    <h3 class="neptune">/addresses example</h3>
+
     <pre><code># Load libraries
 library(httr)
 library(jsonlite)
@@ -35,6 +37,8 @@ results <- jsonlite::fromJSON(content, flatten = TRUE)</code></pre>
 
     <p>The print function is included so the result can be seen in the console only, and should be removed for actual use.</p>
 
+    <h3 class="neptune">/addresses example</h3>
+
     <pre><code>import json
 import requests
 
@@ -49,15 +53,64 @@ request = api_url + endpoint + search_term
 
 def get_addresses():
 
-    response = requests.get(request, params=params, headers=header)
-    json_response = json.loads(response.text)
+    try:
+        response = requests.get(request, params=params, headers=header)
+        response.raise_for_status()
+        results = json.loads(response.text)
+    except requests.exceptions.HTTPError as error:
+        if error.response.status_code == 400:
+            results = json.loads(response.text)
+        else:
+            results = error
+    except requests.exceptions.RequestException as error:
+        results = error
 
-    print(json_response)
+    print(results)
 
-    return json_response
+    return results
 
 if __name__ == '__main__':
     get_addresses()</code></pre>
+
+    <h3 class="neptune">/bulk example</h3>
+
+    <pre><code>import json
+import requests
+
+api_url = "#API_URL#"
+endpoint = "/bulk"
+header = {"Content-Type": "application/json", 'Authorization': "#API_KEY#"}
+data = {"addresses": [{"id": "1", "address": "4 Gate Reach, Exeter, EX2 6GA"},
+                      {"id": "2", "address": "Costa Coffee, 12 Bedford Street, Exeter, EX1 1LL"}]}
+
+request = api_url + endpoint
+
+
+def get_addresses():
+
+    try:
+        response = requests.post(request, json=data, headers=header)
+        response.raise_for_status()
+        results = json.loads(response.text)
+    except requests.exceptions.HTTPError as error:
+        if error.response.status_code == 400:
+            results = response.text
+        else:
+            results = error
+    except requests.exceptions.RequestException as error:
+        results = error
+
+    print(results)
+
+    return results
+
+if __name__ == '__main__':
+    get_addresses()</code></pre>
+
+
+
+
+
 
 </div>
 

@@ -57,7 +57,10 @@ def endpoints(endpoint_path):
             try:
                 response = requests.post(uri, data=form.bodyquery.data, params=form.data, headers=header)
                 response.raise_for_status()
-                results = json.dumps(response.json(), sort_keys=True, indent=4, separators=(',', ': '))
+                try:
+                    results = json.dumps(response.json(), sort_keys=True, indent=4, separators=(',', ': '))
+                except ValueError:
+                    results = response.text
             except requests.exceptions.HTTPError as e:
                 if e.response.status_code == 400:
                     results = json.dumps(response.json(), sort_keys=True, indent=4, separators=(',', ': '))
@@ -69,7 +72,10 @@ def endpoints(endpoint_path):
             try:
                 response = requests.get(uri, params=form.data)
                 response.raise_for_status()
-                results = json.dumps(response.json(), sort_keys=True, indent=4, separators=(',', ': '))
+                try:
+                    results = json.dumps(response.json(), sort_keys=True, indent=4, separators=(',', ': '))
+                except ValueError:
+                    results = response.text
             except requests.exceptions.HTTPError as e:
                 if e.response.status_code == 400:
                     results = json.dumps(response.json(), sort_keys=True, indent=4, separators=(',', ': '))

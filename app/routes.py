@@ -142,6 +142,11 @@ def update_timeline():
     return render_template('update-timelines.html')
 
 
+@app.route('/methodology')
+def methodology():
+    return render_template('methodology.html')
+
+
 @app.route('/versions')
 def versions():
 

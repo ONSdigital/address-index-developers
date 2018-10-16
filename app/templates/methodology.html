@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Methodology{% endblock %}
+
+{% block content %}
+<h1 class="jupiter">Methodology</h1>
+
+<h2 class="saturn">Calculating the Confidence Score for address match and bulk match</h2>
+
+<p>The matching of an input address string consists of a six step process:</p>
+<ol>
+    <li>The string is parsed and tokenised in order to determine the component parts of the address (for example which part is the street, town, postcode etc).</li>
+    <li>A complex query is performed using an Elasticsearch index (built from AddressBase), which allocates a raw 'underlying score' value to each result.</li>
+    <li>The results of this query are analysed and checked using an advanced comparison algorithm which calculates a 'bespoke score' for each result.</li>
+    <li>A meaningful, “confidence score” is obtained by combining the 'underlying score' and 'bespoke score'.</li>
+    <li>The API then applies a configurable 'match threshold' to discard the results below the threshold, removing the least likely results.</li>
+    <li>The remaining results are then sorted by descending score, returning up to the number specified by the user in the 'limit' parameter.</li>
+</ol>
+
+<h3 class="neptune">Example</h3>
+
+<p>A search result from the API returns an underlying score of 4.2, and a confidence score of 0.76.</p>
+
+<p>The Elasticsearch underlying score is not an absolute value, but is relative to other values so 4.2 is better that 3.1, but how much better is not clear.</p>
+
+<p>The composite score however is a value between 0 and 1 (which can be multiplied up into a percentage, so 0.76 equates to 76%), giving a clearer indication of the match being correct.</p>
+
+<p>The composite score can also lead to fewer results being returned. The closer the search string is to a real address, the higher the score and the fewer results are returned.</p>
+
+
+{% endblock %}

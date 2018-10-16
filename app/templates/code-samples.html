@@ -54,7 +54,7 @@ request = api_url + endpoint + search_term
 def get_addresses():
 
     try:
-        response = requests.get(request, params=params, headers=header)
+        response = requests.get(request, params=params, headers=header, timeout=1000000., verify=false)
         response.raise_for_status()
         results = json.loads(response.text)
     except requests.exceptions.HTTPError as error:
@@ -89,7 +89,7 @@ request = api_url + endpoint
 def get_addresses():
 
     try:
-        response = requests.post(request, json=data, headers=header)
+        response = requests.post(request, json=data, headers=header, timeout=1000000., verify=false)
         response.raise_for_status()
         results = json.loads(response.text)
     except requests.exceptions.HTTPError as error:

@@ -8,6 +8,6 @@ class Config(object):
 host = os.getenv('HOST')
 port = os.getenv('PORT')
 # swagger_url = os.getenv('SWAGGER_URL')
-swagger_url = "http://addressindex-api-dev.apps.devtest.onsclofo.uk/assets/swagger.json"
+swagger_url = "http://addressindex-api-beta.apps.devtest.onsclofo.uk/assets/swagger.json"
 # api_url = os.getenv('API_URL')
-api_url = "http://addressindex-api-dev.apps.devtest.onsclofo.uk"
+api_url = "http://addressindex-api-beta.apps.devtest.onsclofo.uk"

@@ -2,7 +2,7 @@ import os
 
 
 class Config(object):
-   SECRET_KEY = os.environ.get('SECRET_KEY') | "you will never guess"
+   SECRET_KEY = os.environ.get('SECRET_KEY') or "you will never guess"
 
 host = os.getenv('HOST')
 port = os.getenv('PORT')

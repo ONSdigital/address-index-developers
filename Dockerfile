@@ -1,7 +1,7 @@
 FROM centos
 
 RUN yum --enablerepo=extras install -y epel-release && \
-	yum install -y python-pip python-dev
+	yum install -y python-pip python-dev mailcap
 
 COPY ./requirements.txt /app/requirements.txt
 
@@ -19,6 +19,4 @@ ENV API_URL='http://host.docker.internal:9000'
 ENV SWAGGER_URL=$API_URL'/assets/swagger.json'
 ENV SECRET_KEY='you-will-never-guess'
 
-ENTRYPOINT [ "python" ]
-
-CMD [ "/app/developers.py" ]
+CMD ["python", "/app/developers.py"]

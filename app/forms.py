@@ -17,6 +17,8 @@ class commonForm(FlaskForm):
     lon = StringField('Longitude')
     startdate = StringField('Start Date')
     enddate = StringField('End Date')
+    fromsource = StringField('From Source', default='all')
+    startboost = StringField('Start Boost', default=2)
     bodyquery = TextAreaField('Body')
     submit = SubmitField('Search')
 

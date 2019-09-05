@@ -19,6 +19,8 @@ class commonForm(FlaskForm):
     enddate = StringField('End Date')
     fromsource = StringField('From Source', default='all')
     startboost = StringField('Start Boost', default=2)
+    fallback = StringField('Fallback', default='true')
+    epoch = StringField('Epoch')
     bodyquery = TextAreaField('Body')
     submit = SubmitField('Search')
 

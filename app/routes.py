@@ -10,8 +10,8 @@ import json
 
 def get_swagger():
     try:
-        response = requests.get(swagger_url)
-        swagger_json = json.loads(response.text)
+        f = open('ai-swagger.json',)
+        swagger_json = json.load(f)
         return swagger_json
 
     except requests.ConnectionError as e:

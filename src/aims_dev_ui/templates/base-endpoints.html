@@ -6,15 +6,15 @@
 
 <h1 class="jupiter">{{ endpoint }}</h1>
 
-{% if swaggerJson.paths[endpoint]["post"] %}
+{% if swagger_json.paths[endpoint]["post"] %}
 
-    <p>{{ swaggerJson.paths[endpoint]["post"]["summary"] }}</p>
+    <p>{{ swagger_json.paths[endpoint]["post"]["summary"] }}</p>
 
     <h2 class="saturn">Request</h2>
 
     <p class="documentation"><code>POST {{ endpoint }}</code></p>
 
-    {% if swaggerJson.paths[endpoint]["post"]["parameters"] %}
+    {% if swagger_json.paths[endpoint]["post"]["parameters"] %}
 
     <h3 class="neptune">Query parameters</h3>
 
@@ -27,7 +27,7 @@
         </thead>
         <tbody>
 
-        {% for singleParameter in swaggerJson.paths[endpoint]["post"]["parameters"] %}
+        {% for singleParameter in swagger_json.paths[endpoint]["post"]["parameters"] %}
         {% if singleParameter.in == "query" %}
         <tr class="table--row">
             <td class="table--cell">{{ singleParameter.name }}</td>
@@ -49,7 +49,7 @@
 
     <h2 class="saturn">Responses</h2>
 
-    {% for responseCode, responseValue in swaggerJson.paths[endpoint]["post"]["responses"].items() %}
+    {% for responseCode, responseValue in swagger_json.paths[endpoint]["post"]["responses"].items() %}
         <h3 class="neptune">{{responseCode}}</h3>
         <p>{{responseValue["description"]}}</p>
     {% endfor %}
@@ -76,7 +76,7 @@
 
         {{ form.hidden_tag() }}
 
-        {% if swaggerJson.paths[endpoint]["post"]["parameters"] %}
+        {% if swagger_json.paths[endpoint]["post"]["parameters"] %}
 
         <table class="table">
             <tbody>
@@ -85,7 +85,7 @@
                 <td class="table--cell">{{ form.bodyquery(cols="60", rows="8", class_="input input--textarea js-charlimit-input", maxlength_="5000") }}</td>
                 <td class="table--cell">Body query, in JSON format</td>
             </tr>
-            {% for singleParameterPost in swaggerJson.paths[endpoint]["post"]["parameters"] %}
+            {% for singleParameterPost in swagger_json.paths[endpoint]["post"]["parameters"] %}
             <tr class="table--row">
                 <td class="table--cell">{{ singleParameterPost.name }}</td>
                 <td class="table--cell"><input name="{{ singleParameterPost.name }}" class="input input--text" id="{{ singleParameterPost.name }}" type="text" {% if singleParameterPost.default or singleParameterPost.default == 0 %}value="{{ singleParameterPost.default }}"{% else %} value="" {%endif%}></td>
@@ -117,13 +117,13 @@
 
 {% else %}
 
-    <p>{{ swaggerJson.paths[endpoint]["get"]["summary"] }}</p>
+    <p>{{ swagger_json.paths[endpoint]["get"]["summary"] }}</p>
 
     <h2 class="saturn">Request</h2>
 
     <p class="documentation"><code>GET {{ endpoint }}</code></p>
 
-    {% if swaggerJson.paths[endpoint]["get"]["parameters"] %}
+    {% if swagger_json.paths[endpoint]["get"]["parameters"] %}
 
     <h3 class="neptune">Query parameters</h3>
 
@@ -136,7 +136,7 @@
         </thead>
         <tbody>
 
-        {% for singleParameter in swaggerJson.paths[endpoint]["get"]["parameters"] %}
+        {% for singleParameter in swagger_json.paths[endpoint]["get"]["parameters"] %}
         {% if singleParameter.in == "query" %}
         <tr class="table--row">
             <td class="table--cell">{{ singleParameter.name }}</td>
@@ -158,7 +158,7 @@
 
     <h2 class="saturn">Responses</h2>
 
-    {% for responseCode, responseValue in swaggerJson.paths[endpoint]["get"]["responses"].items() %}
+    {% for responseCode, responseValue in swagger_json.paths[endpoint]["get"]["responses"].items() %}
         <h3 class="neptune">{{responseCode}}</h3>
         <p>{{responseValue["description"]}}</p>
     {% endfor %}
@@ -184,11 +184,11 @@
 
         {{ form.hidden_tag() }}
 
-        {% if swaggerJson.paths[endpoint]["get"]["parameters"] %}
+        {% if swagger_json.paths[endpoint]["get"]["parameters"] %}
 
         <table class="table">
             <tbody>
-            {% for singleParameter in swaggerJson.paths[endpoint]["get"]["parameters"] %}
+            {% for singleParameter in swagger_json.paths[endpoint]["get"]["parameters"] %}
             <tr class="table--row">
                 <td class="table--cell">{{ singleParameter.name }}</td>
                 <td class="table--cell"><input name="{{ singleParameter.name }}" class="input input--text" id="{{ singleParameter.name }}" type="text" {% if singleParameter.default or singleParameter.default == 0 %}value="{{ singleParameter.default }}"{% else %} value="" {%endif%}></td>

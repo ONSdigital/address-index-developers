@@ -2,7 +2,8 @@ from flask_wtf import FlaskForm
 
 from wtforms import StringField, SubmitField, TextAreaField
 
-class commonForm(FlaskForm):
+
+class CommonForm(FlaskForm):
     input = StringField('Input')
     postcode = StringField('Postcode')
     uprn = StringField('UPRN')
@@ -23,4 +24,3 @@ class commonForm(FlaskForm):
     epoch = StringField('Epoch')
     bodyquery = TextAreaField('Body')
     submit = SubmitField('Search')
-

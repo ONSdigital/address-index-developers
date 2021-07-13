@@ -5,6 +5,7 @@ from flask import Flask
 from .config import base as config_base
 from .logging import setup_logging
 
+
 mimetypes.add_type('image/svg+xml', '.svg')
 
 setup_logging(os.getenv('PLATFORM'))

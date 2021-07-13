@@ -1,23 +1,31 @@
-FROM docker.io/centos
+FROM docker.io/python
 
+ENV PATH="/home/aims/.local/bin:${PATH}"
+ENV FLASK_APP=aims_dev_ui
 ENV FLASK_ENV=development
 ENV PORT=5000
 ENV HOST='0.0.0.0'
-# host.docker.internal wouldn't be required if we run the API in another container
+# host.docker.internal wouldn't be required if we ran the API in another container
 ENV API_URL='http://host.docker.internal:9000'
 ENV SWAGGER_URL=$API_URL'/assets/swagger.json'
 ENV SECRET_KEY='you-will-never-guess'
 
-RUN dnf install -y python3 python3-devel python3-pip mailcap
-RUN adduser webuser
-RUN mkdir /home/webuser/ai-developers
-WORKDIR /home/webuser/ai-developers
+RUN adduser --disabled-password --gecos '' --home /home/aims aims
+WORKDIR /home/aims
 
-USER webuser
+USER aims
 
 COPY ./requirements.txt .
 RUN pip3 install --user -r requirements.txt
+RUN pip3 install --user setuptools wheel gunicorn
 
-COPY . /app
+COPY --chown=aims:aims . ./aims-dev-ui
 
-CMD ["python", "developers.py"]
+RUN pip3 install --use-feature=in-tree-build --user ./aims-dev-ui
+
+EXPOSE 5000
+
+CMD ["flask", "run", "--host=0.0.0.0", "-p", "5000"]
+
+# for later use in production environments
+# CMD ["gunicorn", "-b", "0.0.0.0:8080", "aims_dev_ui:app", "--log-level=info"]

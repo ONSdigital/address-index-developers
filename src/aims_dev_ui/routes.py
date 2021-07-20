@@ -12,7 +12,7 @@ import re
 def get_swagger():
   url = app.config['SWAGGER_URL']
   try:
-    f = open('ai-swagger.json', )
+    f = open('../../ai-swagger.json', )
     swagger_json = json.load(f)
     return swagger_json
 

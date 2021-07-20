@@ -12,8 +12,8 @@ import re
 def get_swagger():
   url = app.config['SWAGGER_URL']
   try:
-    response = requests.get(url)
-    swagger_json = json.loads(response.text)
+    f = open('ai-swagger.json', )
+    swagger_json = json.load(f)
     return swagger_json
 
   except requests.ConnectionError as e:
@@ -120,7 +120,8 @@ def endpoints(endpoint_path):
     swagger_url = app.config['SWAGGER_URL']
     try:
       response = requests.get(swagger_url)
-      swagger_json = json.loads(response.text)
+      #swagger_json = json.loads(response.text)
+      swagger_json = get_swagger()
       return render_template('base-endpoints.html',
                              api_url=api_url,
                              swagger_json=swagger_json,

@@ -5,20 +5,41 @@ from . import app
 from .forms import CommonForm
 
 import requests
+import logging
 import json
 import re
 
 
-def get_swagger():
+logger = logging.getLogger('aims_dev_ui')
+
+
+def get_swagger_by_url():
   url = app.config['SWAGGER_URL']
   try:
-    f = open('~/aims-dev-ui/ai-swagger.json', )
-    swagger_json = json.load(f)
-    return swagger_json
-
+    response = requests.get(url)
+    return json.loads(response.text)
   except requests.ConnectionError as e:
-    error = str(e)
-    return render_template('error.html', swagger_url=url, error=error)
+    return render_template('error.html', swagger_url=url, error=str(e))
+
+
+def get_swagger_by_file():
+  path = app.config['SWAGGER_PATH']
+  try:
+    with open(path) as f:
+      return json.load(f)
+  except FileNotFoundError as e:
+    return render_template('error.html', swagger_url=url, error=str(e))
+
+
+def get_swagger():
+  if app.config.get('SWAGGER_PATH'):
+    return get_swagger_by_path()
+  elif app.config.get('SWAGGER_URL'):
+    return get_swagger_by_url()
+  else:
+    err = 'invalid swagger configuration'
+    logger.error(err)
+    return render_template('error.html', swagger_url=None, error=err)
 
 
 @app.route("/")
@@ -120,7 +141,6 @@ def endpoints(endpoint_path):
     swagger_url = app.config['SWAGGER_URL']
     try:
       response = requests.get(swagger_url)
-      #swagger_json = json.loads(response.text)
       swagger_json = get_swagger()
       return render_template('base-endpoints.html',
                              api_url=api_url,

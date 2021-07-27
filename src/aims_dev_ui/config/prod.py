@@ -9,3 +9,4 @@ if not (API_URL := os.getenv('API_URL')):
   raise RuntimeError('no API_URL env variable set')
 
 SWAGGER_URL = os.getenv('SWAGGER_URL') or API_URL + '/assets/swagger.json'
+SWAGGER_PATH = os.getenv('SWAGGER_PATH')

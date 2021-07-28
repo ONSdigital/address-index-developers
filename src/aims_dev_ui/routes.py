@@ -15,20 +15,14 @@ logger = logging.getLogger('aims_dev_ui')
 
 def get_swagger_by_url():
   url = app.config['SWAGGER_URL']
-  try:
-    response = requests.get(url)
-    return json.loads(response.text)
-  except requests.ConnectionError as e:
-    return render_template('error.html', swagger_url=url, error=str(e))
+  response = requests.get(url)
+  return json.loads(response.text)
 
 
 def get_swagger_by_file():
   path = app.config['SWAGGER_PATH']
-  try:
-    with open(path) as f:
-      return json.load(f)
-  except FileNotFoundError as e:
-    return render_template('error.html', swagger_url=url, error=str(e))
+  with open(path) as f:
+    return json.load(f)
 
 
 def get_swagger():
@@ -37,9 +31,7 @@ def get_swagger():
   elif app.config.get('SWAGGER_URL'):
     return get_swagger_by_url()
   else:
-    err = 'invalid swagger configuration'
-    logger.error(err)
-    return render_template('error.html', swagger_url=None, error=err)
+    raise RuntimeError('invalid swagger configuration')
 
 
 @app.route("/")

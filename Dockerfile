@@ -7,13 +7,16 @@ ENV PORT=5000
 ENV HOST='0.0.0.0'
 # host.docker.internal wouldn't be required if we ran the API in another container
 ENV API_URL='http://host.docker.internal:9000'
-ENV SWAGGER_URL=$API_URL'/assets/swagger.json'
+#ENV SWAGGER_URL=$API_URL'/assets/swagger.json'
+ENV SWAGGER_FILE='/home/aims/ai-swagger.json'
 ENV SECRET_KEY='you-will-never-guess'
 
 RUN adduser --disabled-password --gecos '' --home /home/aims aims
 WORKDIR /home/aims
 
 USER aims
+
+ADD https://raw.githubusercontent.com/ONSdigital/address-index-api/master/api-definitions/ai-swagger.json .
 
 COPY ./requirements.txt .
 RUN pip3 install --user -r requirements.txt

@@ -19,7 +19,7 @@ def get_swagger_by_url():
   return json.loads(response.text)
 
 
-def get_swagger_by_file():
+def get_swagger_by_path():
   path = app.config['SWAGGER_PATH']
   with open(path) as f:
     return json.load(f)

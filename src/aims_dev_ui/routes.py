@@ -88,16 +88,16 @@ def endpoints(endpoint_path):
                                separators=(',', ': '))
         except ValueError:
           results = response.text
-      except requests.exceptions.HTTPError as e:
-        if e.response.status_code == 400:
+      except requests.exceptions.HTTPError as error:
+        if error.response.status_code == 400:
           results = json.dumps(response.json(),
                                sort_keys=True,
                                indent=4,
                                separators=(',', ': '))
         else:
-          results = e
-      except requests.exceptions.RequestException as e:
-        results = e
+          results = error
+      except requests.exceptions.RequestException as error:
+        results = error
     else:
       try:
         response = requests.get(uri, params=form.data)
@@ -109,16 +109,16 @@ def endpoints(endpoint_path):
                                separators=(',', ': '))
         except ValueError:
           results = response.text
-      except requests.exceptions.HTTPError as e:
-        if e.response.status_code == 400:
+      except requests.exceptions.HTTPError as error:
+        if error.response.status_code == 400:
           results = json.dumps(response.json(),
                                sort_keys=True,
                                indent=4,
                                separators=(',', ': '))
         else:
-          results = e
-      except requests.exceptions.RequestException as e:
-        results = e
+          results = error
+      except requests.exceptions.RequestException as error:
+        results = error
 
     return render_template('base-endpoints.html',
                            api_url=api_url,
@@ -129,21 +129,17 @@ def endpoints(endpoint_path):
                            request=request)
 
   elif request.method == 'GET':
-
-    swagger_url = app.config['SWAGGER_URL']
     try:
-      response = requests.get(swagger_url)
       return render_template('base-endpoints.html',
                              api_url=api_url,
                              swagger_json=get_swagger(),
                              endpoint=endpoint_value,
                              form=form)
 
-    except requests.ConnectionError as e:
-      error = str(e)
+    except requests.ConnectionError as error:
       return render_template('error.html',
                              uri=swagger_url,
-                             error=error,
+                             error=str(error),
                              error_type="Connection Error",
                              error_detail="Unable to connect to Swagger file")
 

@@ -7,7 +7,11 @@ ENV PORT=5000
 ENV HOST='0.0.0.0'
 # host.docker.internal wouldn't be required if we ran the API in another container
 ENV API_URL='http://host.docker.internal:9000'
-#ENV SWAGGER_URL=$API_URL'/assets/swagger.json'
+# for demo pages that request the user's browser to contact the API directly
+ENV EXTERNAL_API_URL=''
+# if the API above is behind a gateway, place the auth header contents here
+ENV EXTERNAL_API_AUTH=''
+# external swagger: `ENV SWAGGER_URL=$API_URL'/assets/swagger.json'`
 ENV SWAGGER_PATH='/home/aims/ai-swagger.json'
 ENV SECRET_KEY='you-will-never-guess'
 

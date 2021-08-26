@@ -1,4 +1,4 @@
-from flask import render_template, request
+from flask import render_template, request, send_from_directory
 
 from . import app
 
@@ -47,6 +47,11 @@ def quick_start():
 @app.route("/code-samples")
 def code_samples():
   return render_template('code-samples.html')
+
+
+@app.route("/demos/<path:path>")
+def code_samples():
+  return send_from_directory('static/demos', path)
 
 
 @app.route("/endpoints")

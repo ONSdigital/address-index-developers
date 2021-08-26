@@ -50,7 +50,7 @@ def code_samples():
 
 
 @app.route("/demos/<path:path>")
-def code_samples():
+def demos(path):
   return send_from_directory('static/demos', path)
 
 

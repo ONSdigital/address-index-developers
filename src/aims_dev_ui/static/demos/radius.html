@@ -334,14 +334,12 @@
         }
 
         function getJSONResponseWithKey(durl) {
-            var userKey = "demo_ea15dc73-1991-46db-8c02-e3c483bf9e3e"
             $("body").css("cursor", "progress");
             $.support.cors = true; // this is required for IE8
             $.ajax({
                 type: 'GET',
                 url: durl,
-                dataType: 'json',
-                headers: { "Authorization": userKey }
+                dataType: 'json'
             }).done(function(response) {
                 var jsonString = JSON.stringify(response, null, 2);
                 addresses = [];

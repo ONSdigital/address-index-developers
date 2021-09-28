@@ -31,12 +31,12 @@
         {% if singleParameter.in == "query" %}
         <tr class="table--row">
             <td class="table--cell">{{ singleParameter.name }}</td>
-            <td class="table--cell">{{ singleParameter.type }}</td>
+            <td class="table--cell">{{ singleParameter.schema.type }}</td>
             <td class="table--cell">{{ singleParameter.description }}</td>
             <td class="table--cell">
                 {% if singleParameter.required == False %}Optional{% else %}Required{% endif %}
-                {% if singleParameter.default or singleParameter.default == False %}<br>Default: {{ singleParameter.default }}{% endif %}
-                {% if singleParameter.maximum or singleParameter.maximum == False %}<br>Maximum: {{ singleParameter.maximum }}{% endif %}
+                {% if singleParameter.schema.default or singleParameter.schema.default == False %}<br>Default: {{ singleParameter.default }}{% endif %}
+                {% if singleParameter.schema.maximum or singleParameter.schema.maximum == False %}<br>Maximum: {{ singleParameter.maximum }}{% endif %}
             </td>
         </tr>
         {% endif %}
@@ -88,7 +88,7 @@
             {% for singleParameterPost in swagger_json.paths[endpoint]["post"]["parameters"] %}
             <tr class="table--row">
                 <td class="table--cell">{{ singleParameterPost.name }}</td>
-                <td class="table--cell"><input name="{{ singleParameterPost.name }}" class="input input--text" id="{{ singleParameterPost.name }}" type="text" {% if singleParameterPost.default or singleParameterPost.default == 0 %}value="{{ singleParameterPost.default }}"{% else %} value="" {%endif%}></td>
+                <td class="table--cell"><input name="{{ singleParameterPost.name }}" class="input input--text" id="{{ singleParameterPost.name }}" type="text" {% if singleParameterPost.schema.default or singleParameterPost.schema.default == 0 %}value="{{ singleParameterPost.schema.default }}"{% else %} value="" {%endif%}></td>
                 <td class="table--cell">{{ singleParameterPost.description }}</td>
             </tr>
             {% endfor %}
@@ -140,12 +140,12 @@
         {% if singleParameter.in == "query" %}
         <tr class="table--row">
             <td class="table--cell">{{ singleParameter.name }}</td>
-            <td class="table--cell">{{ singleParameter.type }}</td>
+            <td class="table--cell">{{ singleParameter.schema.type }}</td>
             <td class="table--cell">{{ singleParameter.description }}</td>
             <td class="table--cell">
                 {% if singleParameter.required == False %}Optional{% else %}Required{% endif %}
-                {% if singleParameter.default or singleParameter.default == False %}<br>Default: {{ singleParameter.default }}{% endif %}
-                {% if singleParameter.maximum or singleParameter.maximum == False %}<br>Maximum: {{ singleParameter.maximum }}{% endif %}
+                {% if singleParameter.schema.default or singleParameter.schema.default == False %}<br>Default: {{ singleParameter.schema.default }}{% endif %}
+                {% if singleParameter.schema.maximum or singleParameter.schema.maximum == False %}<br>Maximum: {{ singleParameter.schema.maximum }}{% endif %}
             </td>
         </tr>
         {% endif %}
@@ -191,7 +191,7 @@
             {% for singleParameter in swagger_json.paths[endpoint]["get"]["parameters"] %}
             <tr class="table--row">
                 <td class="table--cell">{{ singleParameter.name }}</td>
-                <td class="table--cell"><input name="{{ singleParameter.name }}" class="input input--text" id="{{ singleParameter.name }}" type="text" {% if singleParameter.default or singleParameter.default == 0 %}value="{{ singleParameter.default }}"{% else %} value="" {%endif%}></td>
+                <td class="table--cell"><input name="{{ singleParameter.name }}" class="input input--text" id="{{ singleParameter.name }}" type="text" {% if singleParameter.schema.default or singleParameter.schema.default == 0 %}value="{{ singleParameter.schema.default }}"{% else %} value="" {%endif%}></td>
                 <td class="table--cell">{{ singleParameter.description }}</td>
             </tr>
             {% endfor %}

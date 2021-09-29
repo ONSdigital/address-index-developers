@@ -5,8 +5,8 @@ ENV FLASK_APP=aims_dev_ui
 ENV FLASK_ENV=development
 ENV PORT=5000
 ENV HOST='0.0.0.0'
-# host.docker.internal wouldn't be required if we ran the API in another container
-ENV API_URL='https://initial-test-bulk-1.aims.gcp.onsdigital.uk'
+# host.docker.internal is only required if not pointing to an API in another container
+#ENV API_URL='http://host.docker.internal:9000''
 ENV SWAGGER_URL=$API_URL'/openapi/swagger.json'
 #ENV SWAGGER_PATH='/home/aims/ai-openapi.json'
 ENV SECRET_KEY='seven for a secret never to be told'

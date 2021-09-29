@@ -15,7 +15,7 @@ logger = logging.getLogger('aims_dev_ui')
 
 def get_swagger_by_url():
   url = app.config['SWAGGER_URL']
-  response = requests.get(url)
+  response = requests.get(url, headers={'Authorization': 'Bearer ' + app.config['SECRET_KEY']})
   return json.loads(response.text)
 
 
@@ -74,7 +74,7 @@ def endpoints(endpoint_path):
       uri = api_url + endpoint_value
 
     if form.bodyquery.data:
-      header = {"Content-Type": "application/json"}
+      header = {"Content-Type": "application/json", "Authorization": "Bearer " + app.config["SECRET_KEY"]}
       try:
         response = requests.post(uri,
                                  data=form.bodyquery.data,
@@ -100,7 +100,7 @@ def endpoints(endpoint_path):
         results = error
     else:
       try:
-        response = requests.get(uri, params=form.data)
+        response = requests.get(uri, params=form.data, headers={'Authorization': 'Bearer ' + app.config['SECRET_KEY']})
         response.raise_for_status()
         try:
           results = json.dumps(response.json(),

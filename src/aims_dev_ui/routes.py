@@ -1,4 +1,4 @@
-from flask import render_template, request
+from flask import render_template, request, send_from_directory
 
 from . import app
 
@@ -15,7 +15,7 @@ logger = logging.getLogger('aims_dev_ui')
 
 def get_swagger_by_url():
   url = app.config['SWAGGER_URL']
-  response = requests.get(url, headers={'Authorization': 'Bearer ' + app.config['SECRET_KEY']})
+  response = requests.get(url)
   return json.loads(response.text)
 
 
@@ -48,6 +48,9 @@ def quick_start():
 def code_samples():
   return render_template('code-samples.html')
 
+@app.route("/demos/<path:path>")
+def demos(path):
+    return send_from_directory('static/demos', path)
 
 @app.route("/endpoints")
 def endpoint_lists():
@@ -74,7 +77,7 @@ def endpoints(endpoint_path):
       uri = api_url + endpoint_value
 
     if form.bodyquery.data:
-      header = {"Content-Type": "application/json", "Authorization": "Bearer " + app.config["SECRET_KEY"]}
+      header = {"Content-Type": "application/json"}
       try:
         response = requests.post(uri,
                                  data=form.bodyquery.data,
@@ -100,7 +103,7 @@ def endpoints(endpoint_path):
         results = error
     else:
       try:
-        response = requests.get(uri, params=form.data, headers={'Authorization': 'Bearer ' + app.config['SECRET_KEY']})
+        response = requests.get(uri, params=form.data)
         response.raise_for_status()
         try:
           results = json.dumps(response.json(),

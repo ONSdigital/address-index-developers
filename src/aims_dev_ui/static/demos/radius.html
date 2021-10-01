@@ -263,9 +263,9 @@
         var markersLayer = new L.LayerGroup();
 
         function initMap() {
-            var cenLat = 50.7;
-            var cenLon = -3.5;
-            var iZoom = 6;
+            var cenLat = 50.7225;
+            var cenLon = -3.5299;
+            var iZoom = 12;
             var testLat = document.getElementById('lat');
             var testLon = document.getElementById('lon');
             var testZoom = document.getElementById('izoom');
@@ -372,10 +372,10 @@
 
     <div class="controls">
         <div class="group">
-            <div class="col3">Latitude: <input type="text" name="lat" id="lat" size="18" placeholder="51.5" value="53.3" /></div>
-            <div class="col3">Longitude: <input type="text" name="lon" id="lon" size="18" placeholder="0.12" value="-2.9" /></div>
+            <div class="col3">Latitude: <input type="text" name="lat" id="lat" size="18" placeholder="51.5" value="50.7225" /></div>
+            <div class="col3">Longitude: <input type="text" name="lon" id="lon" size="18" placeholder="0.12" value="-3.5299" /></div>
             <div class="col2">Range(km): <input type="text" name="range" id="range" size="2" placeholder="10" value="10" /></div>
-            <div class="col2">Zoom: <input type="text" name="izoom" id="izoom" size="2" placeholder="1-21" value="6" /></div>
+            <div class="col2">Zoom: <input type="text" name="izoom" id="izoom" size="2" placeholder="1-21" value="12" /></div>
             <div class="col2"><input type="button" onclick="showMap()" name="Map" id="Map" value="Update Map" /></div>
         </div>
 

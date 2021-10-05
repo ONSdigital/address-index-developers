@@ -48,6 +48,10 @@ def quick_start():
 def code_samples():
   return render_template('code-samples.html')
 
+@app.route("/runnable_demos")
+def runnable_demos():
+    return render_template('runnable-demos.html')
+
 @app.route("/demos/<path:path>")
 def demos(path):
     return send_from_directory('static/demos', path)

@@ -11,7 +11,7 @@
 
     <h2 class="saturn">R</h2>
 
-    <p>#API_URL# and #API_KEY# should be replaced with the actual values, appropriate to the environment and user.</p>
+    <p>#API_URL# and #AUTH_STRING# should be replaced with the actual values, appropriate to the environment and user.</p>
 
     <h3 class="neptune">/addresses example</h3>
 
@@ -20,8 +20,8 @@ library(httr)
 library(jsonlite)
 
 # Call the API
-call <- httr::GET("#API_URL#/addresses?input=7 Gate Reach, Exeter, EX2 6GA",
-                  add_headers(Authorization = "#API_KEY#"))
+call <- httr::GET("#API_URL#/addresses?input=Gate Reach, Exeter, EX2 6GA",
+                  add_headers(Authorization = "#AUTH_STRING#"))
 
 # Retrieve the contents of the call
 content <- httr::content(call, as = "text")
@@ -33,7 +33,7 @@ results <- jsonlite::fromJSON(content, flatten = TRUE)</code></pre>
 
     <p>The python example requires the <a href="http://docs.python-requests.org/en/master/" class="icon--external-link">requests</a> library</p>
 
-    <p>#API_URL# and #API_KEY# should be replaced with the actual values, appropriate to the environment and user.</p>
+    <p>#API_URL# and #AUTH_STRING# should be replaced with the actual values, appropriate to the environment and user.</p>
 
     <p>The print function is included so the result can be seen in the console only, and should be removed for actual use.</p>
 
@@ -45,8 +45,8 @@ import requests
 api_url = "#API_URL#"
 endpoint = "/addresses"
 search_term = "" #Only used for UPRN, Partial and Postcode endpoints
-header = {"Content-Type": "application/json", 'Authorization': "#API_KEY#"}
-params = "input=7 Gate Reach, Exeter, EX2 6GA&verbose=true"
+header = {"Content-Type": "application/json", 'Authorization': "#AUTH_STRING#"}
+params = "input=Gate Reach, Exeter, EX2 6GA&verbose=true"
 
 request = api_url + endpoint + search_term
 
@@ -79,7 +79,7 @@ import requests
 
 api_url = "#API_URL#"
 endpoint = "/bulk"
-header = {"Content-Type": "application/json", 'Authorization': "#API_KEY#"}
+header = {"Content-Type": "application/json", 'Authorization': "#AUTH_STRING#"}
 data = {"addresses": [{"id": "1", "address": "4 Gate Reach, Exeter, EX2 6GA"},
                       {"id": "2", "address": "Costa Coffee, 12 Bedford Street, Exeter, EX1 1LL"}]}
 

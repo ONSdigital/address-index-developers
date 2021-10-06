@@ -6,8 +6,8 @@ ENV FLASK_ENV=development
 ENV PORT=5000
 ENV HOST='0.0.0.0'
 # host.docker.internal is only required if not pointing to an API in another container
+# if the ENVs below are commented out, the values from Kubernets will come through
 #ENV API_URL='http://host.docker.internal:9000'
-#ENV API_URL='http://10.210.0.36:9000'
 #ENV SWAGGER_URL=$API_URL'/openapi/swagger.json'
 #ENV SWAGGER_PATH='/home/aims/ai-openapi.json'
 ENV SECRET_KEY='seven for a secret never to be told'

@@ -9,9 +9,8 @@
 <div class="panel panel--simple panel--info panel--spacious" style="margin: 0 0 20px 0;">
     <div class="panel__body">
         <h2 class="venus">Data limitations - the Exeter subset</h2>
-        <p>This private Beta version of the Address Index API Developers site runs against a subset of Address Base, namely the Exeter subset. As a result only addresses within the Exeter subset can be searched and returned by the 'Explore this endpoint' function.</p>
+        <p>This open version of the Address Index API Developers site runs against a subset of AddressBase, namely the Exeter free sample. As a result only addresses within the Exeter subset can be searched and returned by the 'Explore this endpoint' function.</p>
         <p>To aid usage of the 'Explore the endpoint' functions, the below sample queries have been provided as a starting point.</p>
-        <p>The full API does not contain this restriction. It is expected that the Developers site will have access to the full index when it completes the private Beta stage. </p>
     </div>
 </div>
 
@@ -19,15 +18,18 @@
 
 <p>The following examples will return results from the <a href="{{ url_for('endpoints', endpoint_path='addresses') }}">/addresses</a> endpoint when entered into the 'input' field</p>
 
-<p><pre>7 Gate Reach, Exeter</pre></p>
+<p><pre>Gate Reach, Exeter</pre></p>
+<p><pre>Chapel Street, Exeter</pre></p>
+<p><pre>Market Street, Exeter</pre></p>
 <p><pre>University Of Exeter</pre></p>
 <p><pre>coffee</pre></p>
+<p><pre>tesco</pre></p>
 
 <h2 class="saturn">Partial</h2>
 
 <p>The following examples will return results from the <a href="{{ url_for('endpoints', endpoint_path='addresses/partial/{input}') }}">/addresses/partial/{input}</a> endpoint when entered into the 'input' field</p>
 
-<p><pre>7 Gate Re</pre></p>
+<p><pre>7 Gat</pre></p>
 <p><pre>4 EX26GA</pre></p>
 
 <h2 class="saturn">Postcode</h2>

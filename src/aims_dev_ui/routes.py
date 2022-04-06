@@ -189,9 +189,11 @@ def methodology():
 @app.route('/versions')
 def versions():
 
-  git_versions = requests.get(
-      'https://api.github.com/repos/ONSdigital/address-index-api/releases')
+  # git_versions = requests.get(
+  #     'https://api.github.com/repos/ONSdigital/address-index-api/releases')
+  #
+  # version_list = json.loads(git_versions.text)
+  #
+  # return render_template('versions.html', versions=version_list)
 
-  version_list = json.loads(git_versions.text)
-
-  return render_template('versions.html', versions=version_list)
+  return render_template('versions.html')

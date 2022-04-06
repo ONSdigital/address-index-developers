@@ -11,6 +11,7 @@ To help achieve the successful development of your application, when using the A
     <li>Data resources</li>
     <li>Security</li>
     <li>Securing API keys</li>
+    <li>Bulk matching</li>
 </ol>
 
 <h2 class="saturn">Data resources</h2>
@@ -18,8 +19,6 @@ To help achieve the successful development of your application, when using the A
 <p>Data is mostly returned as JSON documents. Your application must tolerate the order of document members changing over time, and expect to receive members it hasn't seen before.</p>
 
 <h2 class="saturn">Security</h2>
-
-<p>The API can only be accessed over TLS 1.2.</p>
 
 <h2 class="saturn">Securing API Credentials</h2>
 
@@ -33,5 +32,10 @@ To help achieve the successful development of your application, when using the A
 
 <p>If you store credentials in files, perhaps inside a configuration or environment file, these should not be stored inside a separate secure repository, not the application source tree, just in case part or all of the source is made public or can be viewed by people who should not have access to the key.</p>
 
+<h2 class="saturn">Bulk matching</h2>
+
+<p>Until the new bulk manager goes live, addresses must be submitted as block of JSON, no more than 30,000 at a time</p>
+
+<p>This JSON will need to be escaped (see <a href="https://www.freeformatter.com/json-escape.html">escaping json</a>) but otherwise do not remove punctuation characters from the input as this may give worse results.</p>
 
 {% endblock %}

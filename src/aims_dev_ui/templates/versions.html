@@ -5,10 +5,8 @@
 {% block content %}
 <h1 class="jupiter">Versions</h1>
 
-{% for version in versions %}
-    <h2>{% if version.prerelease %}<div class="badge badge--amber">Pre-release</div>{% endif %} {{version.name}}</h2>
-    <p>{{version.body}}</p>
-    <p><a href="{{ version.html_url }}" class="icon--external-link">View on GitHub</a></p>
-{% endfor %}
+<p>Versioning has not yet been formally implemented on AIMS but may be in future.</p>
+
+<p>Test and Live versions of the service have different URLs.</p>
 
 {% endblock %}

@@ -333,7 +333,8 @@
         }
 
         function getJSONResponseWithKey(durl) {
-        	    var userKey = "Basic " + document.getElementById("basic").value
+        	//    var userKey = "Basic " + document.getElementById("basic").value
+        	var userKey = "Basic c21pdGhybTpyTiU3VnJnWA=="
             $("body").css("cursor", "progress");
             $.support.cors = true; // this is required for IE8
             $.ajax({
@@ -384,7 +385,7 @@
             <div class="col3">Filter: <input type="text" name="filter" id="filter" size="20" placeholder="e.g. commercial, RD02" value="" /></div>
             <div class="col2">Max:&nbsp;<input type="text" name="max" id="max" size="3" placeholder="max results" value="10" /></div>
             <div class="col2"><input type="button" onclick="getAddresses()" name="Fetch" id="Fetch" value="Get Addresses" /></div>
-            <div class="col2">Auth:&nbsp;<input type="text" name="basic" id="basic" size="6" placeholder="basic" value="" /></div>
+            <!--<div class="col2">Auth:&nbsp;<input type="text" name="basic" id="basic" size="6" placeholder="basic" value="" /></div>-->
         </div>
     </div>
 

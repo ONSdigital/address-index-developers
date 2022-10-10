@@ -35,8 +35,8 @@
             <td class="table--cell">{{ singleParameter.description }}</td>
             <td class="table--cell">
                 {% if singleParameter.required == False %}Optional{% else %}Required{% endif %}
-                {% if singleParameter.schema.default or singleParameter.schema.default == False %}<br>Default: {{ singleParameter.default }}{% endif %}
-                {% if singleParameter.schema.maximum or singleParameter.schema.maximum == False %}<br>Maximum: {{ singleParameter.maximum }}{% endif %}
+                {% if singleParameter.schema.default or singleParameter.schema.default == False %}<br>Default: {{ singleParameter.schema.default }}{% endif %}
+                {% if singleParameter.schema.maximum or singleParameter.schema.maximum == False %}<br>Maximum: {{ singleParameter.schema.maximum }}{% endif %}
             </td>
         </tr>
         {% endif %}

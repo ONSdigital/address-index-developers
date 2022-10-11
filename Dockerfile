@@ -25,11 +25,8 @@ RUN pip3 install --user setuptools wheel gunicorn
 
 COPY --chown=aims:aims . ./aims-dev-ui
 
-RUN pip3 install --use-feature=in-tree-build --user ./aims-dev-ui
+RUN pip3 install --user ./aims-dev-ui
 
 EXPOSE 5000
 
-CMD ["flask", "run", "--host=0.0.0.0", "-p", "5000"]
-
-# for later use in production environments
-# CMD ["gunicorn", "-b", "0.0.0.0:8080", "aims_dev_ui:app", "--log-level=info"]
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "aims_dev_ui:app", "--log-level=info"]

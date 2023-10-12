@@ -7,35 +7,12 @@
 
 <h2 class="saturn">Authentication</h2>
 
-<p>The Address Index API requires authentication credentials, currently the open test site has basic auth and other sites have JWT tokens and IP whitelists.</p>
+<p>The Address Index API requires authentication credentials, currently JWT tokens and IP whitelists.</p>
 
 <p>To use the general-purpose API you need a whitelisted IP (ONS network already whitelisted) and a JWT token.</p>
 
 <p>To use the bulk service from inside DAP, you need special API key for the CA Gateway.</p>
 
-<p>The Exeter "sandbox" API which is used by this website is not IP restricted but requires basic auth.</p>
-
-<p>A username and password for basic auth will have been given to you by the AIMS support team.</p>
-
-<p>Basic authentication requires the setting of the Authorization header to "Basic " + base64 encoded username and password. </p>
-
-<p>One way to encode the username and password is via the F12 console in your browser: my_auth_string = "Basic " + window.btoa('YOUR_USERNAME:YOUR_PASSWORD')</p>
-
-<p>Alternatively, many web frameworks allow the username and password to be passed as parameters when making the API call.</p>
-
 <p>JWT requires the setting of the Authorization header to "Bearer " + token string. </p>
-
-<h2 class="saturn">Example</h2>
-
-<h3 class="neptune">HTTP Basic Authentication</h3>
-
-
-
-<p>curl -XGET -u my_auth_string: <br>
-    {{ host }}/addresses/uprn/10012133622</p>
-
-<p>GET /addresses/uprn/10012133622 HTTP/1.1<br>
-Host: https://initial-test-open-api.aims.gcp.onsdigital.uk<br>
-Authorization: Basic bXldfdGGGG67BpX2eTo=</p>
 
 {% endblock %}

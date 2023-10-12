@@ -9,7 +9,7 @@
 <div class="panel panel--simple panel--info panel--spacious" style="margin: 0 0 20px 0;">
     <div class="panel__body">
         <h2 class="venus">Data limitations - the Exeter subset</h2>
-        <p>These demos are configured to use the free sample AddressBase dataset which only covers Exeter</p>
+        <p>These demos are no longer configured to use the free sample AddressBase dataset which only covers Exeter, but may be again if the site becomes public</p>
     </div>
 </div>
 
@@ -17,7 +17,5 @@
 
 <p>Search for business addresses on a Leaflet map <a href="{{ url_for('demos', path='radius.html') }}">Leaflet map</a> </p>
 
-<p>Note that this demo only works in or near Exeter (area covered by the ABP free sample data).</p>
-
-<p>It uses client-side calls so you will need to provide the Basic auth string version of your username and password (e.g. Basic xxxxx paste in xxxxx) to access the API </p>
+<p>It uses client-side calls so you will need to provide the JWT Bearer  auth string (e.g. Bearer xxxxx paste in xxxxx) to access the API </p>
 {% endblock %}

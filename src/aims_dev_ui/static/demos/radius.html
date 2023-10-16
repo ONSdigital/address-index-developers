@@ -267,9 +267,9 @@
         var markersLayer = new L.LayerGroup();
 
         function initMap() {
-            var cenLat = 50.7225;
-            var cenLon = -3.5299;
-            var iZoom = 12;
+            var cenLat = 50.7;
+            var cenLon = -3.5;
+            var iZoom = 6;
             var testLat = document.getElementById('lat');
             var testLon = document.getElementById('lon');
             var testZoom = document.getElementById('izoom');
@@ -331,15 +331,14 @@
                 var searchTerm = document.getElementById("term").value;
             }
 
-                // first URL is for off-network testing (Exeter only)
-                getJSONResponseWithKey("https://analysis-prod-aims-open-api.gcp.onsdigital.uk/addresses?input=" + searchTerm +
+                getJSONResponseWithKey("https://analysis-prod-aims-bulk-1.gcp.onsdigital.uk/addresses?input=" + searchTerm +
                     "&lat=" + document.getElementById("lat").value + "&lon=" + document.getElementById("lon").value +
                     "&rangekm=" + document.getElementById("range").value + "&classificationfilter=" + document.getElementById("filter").value +
                     "&limit=" + document.getElementById("max").value);
         }
 
         function getJSONResponseWithKey(durl) {
-        	var userKey = "Basic " + document.getElementById("basic").value
+        	var userKey = "Bearer " + document.getElementById("basic").value
             $("body").css("cursor", "progress");
             $.support.cors = true; // this is required for IE8
             $.ajax({
@@ -378,10 +377,10 @@
 
     <div class="controls">
         <div class="group">
-            <div class="col3">Latitude: <input type="text" name="lat" id="lat" size="18" placeholder="51.5" value="50.7225" /></div>
-            <div class="col3">Longitude: <input type="text" name="lon" id="lon" size="18" placeholder="0.12" value="-3.5299" /></div>
+            <div class="col3">Latitude: <input type="text" name="lat" id="lat" size="18" placeholder="51.5" value="53.3" /></div>
+            <div class="col3">Longitude: <input type="text" name="lon" id="lon" size="18" placeholder="0.12" value="-2.9" /></div>
             <div class="col2">Range(km): <input type="text" name="range" id="range" size="2" placeholder="10" value="10" /></div>
-            <div class="col2">Zoom: <input type="text" name="izoom" id="izoom" size="2" placeholder="1-21" value="12" /></div>
+            <div class="col2">Zoom: <input type="text" name="izoom" id="izoom" size="2" placeholder="1-21" value="6" /></div>
             <div class="col2"><input type="button" onclick="showMap()" name="Map" id="Map" value="Update Map" /></div>
         </div>
 
@@ -390,7 +389,7 @@
             <div class="col3">Filter: <input type="text" name="filter" id="filter" size="20" placeholder="e.g. commercial, RD02" value="" /></div>
             <div class="col2">Max:&nbsp;<input type="text" name="max" id="max" size="3" placeholder="max results" value="10" /></div>
             <div class="col2"><input type="button" onclick="getAddresses()" name="Fetch" id="Fetch" value="Get Addresses" /></div>
-            <div class="col2">Auth:&nbsp;<input type="text" name="basic" id="basic" size="6" placeholder="basic" value="" /></div>
+            <div class="col2">Auth:&nbsp;<input type="text" name="basic" id="basic" size="6" placeholder="Bearer" value="" /></div>
         </div>
     </div>
 
